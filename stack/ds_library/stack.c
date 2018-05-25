@@ -73,7 +73,7 @@ static int isEmpty(STACK *pt)
 int push(STACK *pt, int element)
 {
     if (isFull(pt))
-        return 2;
+        return STACK_FULL;
 
     pt->items[++pt->top] = element;
     return 0;
@@ -89,7 +89,7 @@ int push(STACK *pt, int element)
 int peek(STACK *pt, int* result)
 {
     if (isEmpty(pt))
-        return 1;
+        return STACK_EMPTY;
 
     *result = pt->items[pt->top];
     return 0;
@@ -105,7 +105,7 @@ int peek(STACK *pt, int* result)
 int pop(STACK *pt, int* popped_value)
 {
     if (isEmpty(pt))
-        return 1;
+        return STACK_EMPTY;
     
     *popped_value = pt->items[pt->top];
     pt->top--;

@@ -13,6 +13,8 @@
 #ifndef STACK_H
 #define STACK_H
 
+#define STACK_FULL -1
+#define STACK_EMPTY -2
 
 /* Stack Structure */
 struct stack
