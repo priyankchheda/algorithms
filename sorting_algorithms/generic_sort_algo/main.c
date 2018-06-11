@@ -25,7 +25,8 @@ main(int argc, char *argv[])
     // bubble_sort(array, elem_count, elem_size, compare_int);
     // insertion_sort(array, elem_count, elem_size, compare_float);
     // selection_sort(array, elem_count, elem_size, compare_int);
-    merge_sort(array, elem_count, elem_size, compare_int);
+    // merge_sort(array, elem_count, elem_size, compare_int);
+    quick_sort(array, elem_count, elem_size, compare_float);
     printf("Sorted Array:   ");
     print_array(array, elem_count, elem_size);
 }
@@ -66,5 +67,11 @@ compare_float(void* elem1, void* elem2)
 {
     float *p1 = (float*) elem1;
     float *p2 = (float*) elem2;
-    return *p1 - *p2; 
+    float result = *p1 - *p2;
+    if (result == 0.0f)
+        return 0;
+    else if (result > 0.0f)
+        return 1;
+    else
+        return -1;
 }

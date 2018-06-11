@@ -272,3 +272,115 @@ merge_sort( void *array,
                             compare, 0, (int)elem_count - 1);
 }
 
+
+/**
+ * Partition Element
+ * @param array actual array to sort
+ * @param elem_count number of elements in array
+ * @param elem_size size of each element
+ * @param compare pointer to compare function
+ * @param start first index of the array
+ * @param end last index of the array
+ */
+static int
+partition(  void *array,
+            size_t elem_count,
+            size_t elem_size,
+            compareFunction compare,
+            int start,
+            int end)
+{
+    void *pivot = array + (end * elem_size);
+    int partitionIndex = start;
+    for (int i = start; i < end; i++)
+    {
+        if (compare(array + (i * elem_size), pivot) < 0)
+        {
+            swap(   array + (i * elem_size),
+                    array + (partitionIndex * elem_size),
+                    elem_size);
+            partitionIndex++;
+        }
+    }
+    swap(   array + (end * elem_size),
+            array + (partitionIndex * elem_size),
+            elem_size);
+    return partitionIndex;
+}
+
+/**
+ * Get Randomized Partition element
+ * @param array actual array to sort
+ * @param elem_count number of elements in array
+ * @param elem_size size of each element
+ * @param compare pointer to compare function
+ * @param start first index of the array
+ * @param end last index of the array
+ */
+static int
+randomizedPartition(void *array,
+                    size_t elem_count,
+                    size_t elem_size,
+                    compareFunction compare,
+                    int start,
+                    int end)
+{
+    int pivotIndex = start + rand() % (end - start + 1);
+    swap(   array + (end * elem_size),
+            array + (pivotIndex * elem_size),
+            elem_size);
+    return partition(array, elem_count, elem_size, compare, start, end);
+}
+
+/**
+ * Quick Sort Function
+ * @param array actual array to sort
+ * @param elem_count number of elements in array
+ * @param elem_size size of each element
+ * @param compare pointer to compare function
+ * @param start first index of the array
+ * @param end last index of the array
+ */
+static void
+quick_sort_recursion(   void* array,
+                        size_t elem_count,
+                        size_t elem_size,
+                        compareFunction compare,
+                        int start,
+                        int end)
+{
+    if (start < end)
+    {
+        int partitionIndex = randomizedPartition(
+            array, elem_count, elem_size, compare, start, end);
+        quick_sort_recursion(   array, elem_count, elem_size, compare,
+                                start, partitionIndex - 1);
+        quick_sort_recursion(   array, elem_count, elem_size, compare,
+                                partitionIndex + 1, end);
+    }
+}
+
+
+/**
+ * Quick Sort Function
+ *
+ * Quick sort is based on the divide-and-conquer approach based on the idea
+ * of choosing one element as a pivot element and partitioning the array
+ * around it such that: Left side of pivot contains all the elements that
+ * are less than the pivot element Right side contains all elements greater
+ * than the pivot
+ *
+ * @param array actual array to sort
+ * @param elem_count number of elements in array
+ * @param elem_size size of each element
+ * @param compare pointer to compare function
+ */
+void
+quick_sort( void *array,
+            size_t elem_count,
+            size_t elem_size,
+            compareFunction compare)
+{
+    quick_sort_recursion(   array, elem_count, elem_size, compare,
+                            0, (int)elem_count - 1);
+}
