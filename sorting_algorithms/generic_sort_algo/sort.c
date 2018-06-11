@@ -22,10 +22,11 @@
 static void
 swap(void* x, void* y, size_t elem_size)
 {
-    char temp[elem_size];
+    void* temp = malloc(elem_size);
     memcpy(temp, x, elem_size);
     memcpy(x, y, elem_size);
     memcpy(y, temp, elem_size);
+    free(temp);
 }
 
 
