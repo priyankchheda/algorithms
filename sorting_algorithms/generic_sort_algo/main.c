@@ -15,16 +15,17 @@ int
 main(int argc, char *argv[])
 {
     // int array[] = {229, 79, 46, 12, 58, 31, 34, 67, 89, 12, 67, 2};
-    float array[] = {229.56, 79.34, 46.67, 12.3, 58.56, 31.78, 34.78, 67.2,
-                    89.98, 12.34, 67.78, 2.8};
+    float array[] = {229.56, 79.34, 46.67, 12.34, 58.56, 31.78, 34.78, 67.2,
+                    89.98, 12.3, 67.78, 2.8};
     size_t elem_count = sizeof(array) / sizeof(array[0]);
     size_t elem_size = sizeof(array[0]);
     
     printf("Original Array: ");
     print_array(array, elem_count, elem_size);
     // bubble_sort(array, elem_count, elem_size, compare_int);
-    insertion_sort(array, elem_count, elem_size, compare_float);
+    // insertion_sort(array, elem_count, elem_size, compare_float);
     // selection_sort(array, elem_count, elem_size, compare_int);
+    merge_sort(array, elem_count, elem_size, compare_int);
     printf("Sorted Array:   ");
     print_array(array, elem_count, elem_size);
 }

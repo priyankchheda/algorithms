@@ -147,3 +147,127 @@ selection_sort( void *array,
                 elem_size);
     }
 }
+
+
+/* Merge Function
+ * @param array actual array to sort
+ * @param elem_count number of elements in array
+ * @param elem_size size of each element
+ * @param compare pointer to compare function
+ * @param low first index of the parital array
+ * @param high last index of the parital array
+ * @param mid middle index of the parital array
+ */
+static void
+merge(  void *array,
+        size_t elem_count,
+        size_t elem_size,
+        compareFunction compare,
+        int low,
+        int high,
+        int mid)
+{
+    int i, j, k;
+    void *temp_array = malloc((high-low+1) * elem_size);
+
+    i = low;
+    j = mid + 1;
+    k = 0;
+
+    while (i <= mid && j <= high)
+    {
+        void *elem1 = array + (i * elem_size);
+        void *elem2 = array + (j * elem_size);
+        if (compare(elem2, elem1) > 0)
+        {
+            memcpy(temp_array + (k * elem_size), elem1, elem_size);
+            i++;
+        }
+        else
+        {
+            memcpy(temp_array + (k * elem_size), elem2, elem_size);
+            j++;
+        }
+        k++;
+    }
+
+    while (i <= mid)
+    {
+        memcpy( temp_array + (k * elem_size),
+                array + (i * elem_size),
+                elem_size);
+        i++;
+        k++;
+    }
+
+    while (j <= high)
+    {
+        memcpy( temp_array + (k * elem_size),
+                array + (j * elem_size),
+                elem_size);
+        j++;
+        k++;
+    }
+
+    for (i = low; i <= high; i++)
+        memcpy( array + (i * elem_size),
+                temp_array + ((i - low) * elem_size),
+                elem_size);
+
+    free(temp_array);
+}
+
+
+/* Merge Sort Function
+ * @param array actual array to sort
+ * @param elem_count number of elements in array
+ * @param elem_size size of each element
+ * @param compare pointer to compare function
+ * @param low first index of the parital array
+ * @param high last index of the parital array
+ */
+static void
+merge_sort_recursion(   void* array,
+                        size_t elem_count,
+                        size_t elem_size,
+                        compareFunction compare,
+                        int low,
+                        int high)
+{
+    int mid;
+    if (low < high)
+    {
+        mid = (low + high) / 2;
+        merge_sort_recursion(   array, elem_count, elem_size,
+                                compare, low, mid);
+        merge_sort_recursion(   array, elem_count, elem_size,
+                                compare, mid + 1, high);
+        merge(array, elem_count, elem_size, compare,low, high, mid);
+    }
+}
+
+
+/* Merge Sort Function
+ *
+ * Like QuickSort, Merge Sort is a Divide and Conquer algorithm. It divides
+ * input array in two halves, calls itself for the two halves and then
+ * merges the two sorted halves. The merge() function is used for merging
+ * two halves. The merge(arr, l, m, r) is key process that assumes that
+ * arr[l..m] and arr[m+1..r] are sorted and merges the two sorted
+ * sub-arrays into one.
+ *
+ * @param array actual array to sort
+ * @param elem_count number of elements in array
+ * @param elem_size size of each element
+ * @param compare pointer to compare function
+ */
+void
+merge_sort( void *array,
+            size_t elem_count,
+            size_t elem_size,
+            compareFunction compare)
+{
+    merge_sort_recursion(   array, elem_count, elem_size,
+                            compare, 0, (int)elem_count - 1);
+}
+

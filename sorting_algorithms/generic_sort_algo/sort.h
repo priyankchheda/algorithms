@@ -16,5 +16,6 @@ typedef int (*compareFunction)(void*, void*);
 void bubble_sort(void*, size_t, size_t, compareFunction);
 void insertion_sort(void*, size_t, size_t, compareFunction);
 void selection_sort(void*, size_t, size_t, compareFunction);
+void merge_sort(void*, size_t, size_t, compareFunction);
 
 #endif
