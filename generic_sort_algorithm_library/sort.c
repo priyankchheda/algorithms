@@ -384,3 +384,46 @@ quick_sort( void *array,
     quick_sort_recursion(   array, elem_count, elem_size, compare,
                             0, (int)elem_count - 1);
 }
+
+
+/*
+ * Shell Sort Function
+ *
+ * ShellSort is mainly a variation of Insertion Sort. In insertion sort, we
+ * move elements only one position ahead. When an element has to be moved far
+ * ahead, many movements are involved. The idea of shellSort is to allow
+ * exchange of far items. In shellSort, we make the array h-sorted for a large
+ * value of h. We keep reducing the value of h until it becomes 1. An array is
+ * said to be h-sorted if all sublists of every h’th element is sorted.
+ *
+ *
+ * @param array actual array to sort
+ * @param elem_count number of elements in array
+ * @param elem_size size of each element
+ * @param compare pointer to compare function
+ */
+void
+shell_sort(void *array,
+        size_t elem_count,
+        size_t elem_size,
+        compareFunction compare)
+{
+    size_t gap, i, j;
+	for (gap = elem_count/2; gap > 0; gap /= 2)
+    {
+        for (i = gap; i < elem_count; i += 1)
+        {
+            void *value = malloc(elem_size);
+            memcpy(value, array + (i * elem_size), elem_size);
+            for (j = i; j >= gap && compare(array + ((j - gap) * elem_size),
+                value) > 0; j -= gap)
+            {
+                memcpy( array + (j * elem_size),
+                        array + ((j - gap) * elem_size),
+                        elem_size);
+            }
+            memcpy(array + (j * elem_size), value, elem_size);
+
+        }
+    }
+}

@@ -26,7 +26,8 @@ main(int argc, char *argv[])
     // insertion_sort(array, elem_count, elem_size, compare_float);
     // selection_sort(array, elem_count, elem_size, compare_int);
     // merge_sort(array, elem_count, elem_size, compare_int);
-    quick_sort(array, elem_count, elem_size, compare_float);
+    // quick_sort(array, elem_count, elem_size, compare_float);
+    shell_sort(array, elem_count, elem_size, compare_int);
     printf("Sorted Array:   ");
     print_array(array, elem_count, elem_size);
 }

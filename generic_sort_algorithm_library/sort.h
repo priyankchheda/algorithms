@@ -18,5 +18,6 @@ void insertion_sort(void*, size_t, size_t, compareFunction);
 void selection_sort(void*, size_t, size_t, compareFunction);
 void merge_sort(void*, size_t, size_t, compareFunction);
 void quick_sort(void*, size_t, size_t, compareFunction);
+void shell_sort(void*, size_t, size_t, compareFunction);
 
 #endif
