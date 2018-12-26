@@ -1,21 +1,19 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"os"
+	"errors"
 )
 
 // ExpressionEvaluation evalutes the expression using Dijkstra's two stack
 // algorithm
-func ExpressionEvaluation(expression string) {
+func ExpressionEvaluation(expression string) (string, error) {
 	operator := newStack()
 	operand := newStack()
 
 	for i := 0; i < len(expression); i++ {
 		nextCharacter := string(expression[i])
 
-		if isOpenParentheses(nextCharacter) {
+		if nextCharacter == "(" {
 			operator.push(nextCharacter)
 
 		} else if isDigit(nextCharacter) {
@@ -39,13 +37,16 @@ func ExpressionEvaluation(expression string) {
 			for getPrecedence(nextCharacter) <= getPrecedence(topElement) &&
 				!operand.isEmpty() &&
 				!operator.isEmpty() {
+				if operand.size() < 2 {
+					return "", errors.New("Invalid Expression")
+				}
 				operand2, _ := operand.pop()
 				operand1, _ := operand.pop()
 				ops, _ := operator.pop()
 
 				result, err := computeOperation(operand1, operand2, ops)
 				if err != nil {
-					log.Fatalln("Error: while compute_stack2")
+					return "", err
 				}
 				operand.push(result)
 
@@ -55,29 +56,37 @@ func ExpressionEvaluation(expression string) {
 			}
 			operator.push(nextCharacter)
 
-		} else if isCloseParentheses(nextCharacter) {
+		} else if nextCharacter == ")" {
 			topElement, err := operator.peek()
 			if err != nil {
 				if serr, ok := err.(*stackError); ok {
 					if serr.code == 2 {
-						log.Fatalln("Error: Invalid Expression")
+						return "", errors.New("Invalid Expression")
 					}
 				}
 			}
 
 			for topElement != "(" && !operator.isEmpty() && !operand.isEmpty() {
+				if operand.size() < 2 {
+					return "", errors.New("Invalid Expression")
+				}
 				operand2, _ := operand.pop()
 				operand1, _ := operand.pop()
 				ops, _ := operator.pop()
 
 				result, err := computeOperation(operand1, operand2, ops)
 				if err != nil {
-					log.Fatalln("Error: while compute_stack")
+					return "", err
 				}
 				operand.push(result)
 
-				if !operator.isEmpty() {
-					topElement, _ = operator.peek()
+				topElement, err = operator.peek()
+				if err != nil {
+					if serr, ok := err.(*stackError); ok {
+						if serr.code == 2 {
+							return "", errors.New("Invalid Expression")
+						}
+					}
 				}
 			}
 
@@ -86,7 +95,7 @@ func ExpressionEvaluation(expression string) {
 			}
 
 		} else {
-			log.Fatalln("Error: Unknown Character")
+			return "", errors.New("Unknown Character")
 		}
 
 		// fmt.Printf("\noperand: %v\n", operand)
@@ -94,13 +103,16 @@ func ExpressionEvaluation(expression string) {
 	}
 
 	for !operator.isEmpty() {
+		if operand.size() < 2 {
+			return "", errors.New("Invalid Expression")
+		}
 		operand2, _ := operand.pop()
 		operand1, _ := operand.pop()
 		ops, _ := operator.pop()
 
 		result, err := computeOperation(operand1, operand2, ops)
 		if err != nil {
-			log.Fatalln("Error: while compute_stack1")
+			return "", err
 		}
 		operand.push(result)
 	}
@@ -108,24 +120,10 @@ func ExpressionEvaluation(expression string) {
 	// fmt.Printf("\noperand: %v\n", operand)
 	// fmt.Printf("operator: %v\n", operator)
 
+	var finalResult string
 	if !operand.isEmpty() {
-		finalResult, _ := operand.pop()
-		fmt.Printf("Final Result: %s\n", finalResult)
+		finalResult, _ = operand.pop()
 	}
 
-	if !operand.isEmpty() || !operator.isEmpty() {
-		fmt.Printf("\noperand: %v\n", operand)
-		fmt.Printf("operator: %v\n", operator)
-		log.Fatalln("Error: Stacks are not completely empty")
-	}
-}
-
-func main() {
-	var expression string
-	if len(os.Args) == 2 {
-		expression = os.Args[1]
-	} else {
-		log.Fatalln("Error: Needs only one expression for evaluate")
-	}
-	ExpressionEvaluation(expression)
+	return finalResult, nil
 }

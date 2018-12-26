@@ -1,28 +1,13 @@
 package main
 
 import (
+	"errors"
 	"strconv"
 )
 
 func isDigit(char string) bool {
 	_, err := strconv.Atoi(char)
 	return err == nil
-}
-
-func isOpenParentheses(char string) bool {
-	switch char {
-	case "(", "{", "[":
-		return true
-	}
-	return false
-}
-
-func isCloseParentheses(char string) bool {
-	switch char {
-	case ")", "}", "]":
-		return true
-	}
-	return false
 }
 
 func isOperator(char string) bool {
@@ -46,12 +31,12 @@ func getPrecedence(char string) int {
 func computeOperation(operand1Str, operand2Str, operator string) (string, error) {
 	operand1, err := strconv.Atoi(operand1Str)
 	if err != nil {
-		return "", err
+		return "", errors.New("Unable to convert operand " + operand1Str + " to string")
 	}
 
 	operand2, err := strconv.Atoi(operand2Str)
 	if err != nil {
-		return "", err
+		return "", errors.New("Unable to convert operand " + operand1Str + " to string")
 	}
 
 	var result int
