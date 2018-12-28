@@ -1,7 +1,7 @@
 /*
  * Sorting Algorithms
  * Merge Sort (C implementation)
- * Author: Priyank Chheda 
+ * Author: Priyank Chheda
  *         E: p.chheda29@gmail.com
  *         W: https://github.com/x899
  *
@@ -71,7 +71,7 @@ merge(int array[], int low, int high, int mid)
 
     while (i <= mid && j <= high)
     {
-        if (array[i] < array[j])
+        if (array[i] <= array[j])
         {
             temp_array[k] = array[i];
             i++;
