@@ -46,8 +46,9 @@ func MergeSort(data []int, low int, high int) {
 	}
 }
 
-func main() {
+func mergeSortInit() {
 	data := []int{-229, 79, 46, 12, 58, 31, 34, 67, -89, 12, 67, 2}
+	fmt.Println("\nUsing Merge Sort:")
 	fmt.Println("Original Array: ", data)
 	MergeSort(data, 0, len(data)-1)
 
