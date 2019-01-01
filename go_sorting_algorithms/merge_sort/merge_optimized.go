@@ -47,7 +47,7 @@ func mergeOptimized(data []int, aux []int, low int, mid int, high int) {
 // algorithm
 func MergeSortOptimized(data []int, aux []int, low int, high int) {
 	if high <= low+cutoff-1 {
-		insertionSort(data[low:high])
+		insertionSort(data[low : high+1])
 	}
 
 	if low < high {
