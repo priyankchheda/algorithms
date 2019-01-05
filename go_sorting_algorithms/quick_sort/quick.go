@@ -37,8 +37,9 @@ func QuickSort(data []int, low int, high int) {
 	QuickSort(data, j+1, high)
 }
 
-func main() {
+func quickSortInit() {
 	data := []int{-229, 79, 46, 12, 58, 31, 34, 67, -89, 12, 67, 2}
+	fmt.Println("\nUsing Quick Sort:")
 	fmt.Println("Original Array: ", data)
 	shuffle(data)
 	QuickSort(data, 0, len(data)-1)
