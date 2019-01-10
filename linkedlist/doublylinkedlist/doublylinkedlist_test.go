@@ -31,8 +31,12 @@ func TestInsertStart(t *testing.T) {
 		list := DoublyLinkedList{0, nil, nil}
 		array := table.data
 		expected_array := table.expected
-		for _, nodeData := range array {
+		for i, nodeData := range array {
 			list.InsertStart(&Node{nodeData, nil, nil})
+			if i+1 != list.Lenght() {
+				t.Errorf("Wrong Lenght got: %v expected: %v",
+					list.Lenght(), i+1)
+			}
 		}
 		output := getDLLDataInSlice(&list)
 		for i := 0; i < len(array); i++ {
@@ -56,8 +60,12 @@ func TestInsertEnd(t *testing.T) {
 	for _, table := range tables {
 		list := DoublyLinkedList{0, nil, nil}
 		array := table.data
-		for _, nodeData := range array {
+		for i, nodeData := range array {
 			list.InsertEnd(&Node{nodeData, nil, nil})
+			if i+1 != list.Lenght() {
+				t.Errorf("Wrong Lenght got: %v expected: %v",
+					list.Lenght(), i+1)
+			}
 		}
 		output := getDLLDataInSlice(&list)
 		for i := 0; i < len(array); i++ {
@@ -81,8 +89,12 @@ func TestHeadTailLenght(t *testing.T) {
 	for _, table := range tables {
 		list := DoublyLinkedList{0, nil, nil}
 		array := table.data
-		for _, nodeData := range array {
+		for i, nodeData := range array {
 			list.InsertEnd(&Node{nodeData, nil, nil})
+			if i+1 != list.Lenght() {
+				t.Errorf("Wrong Lenght got: %v expected: %v",
+					list.Lenght(), i+1)
+			}
 		}
 		output := getDLLDataInSlice(&list)
 		head := list.Head()
@@ -115,8 +127,12 @@ func TestDeleteStart1(t *testing.T) {
 	for _, table := range tables {
 		list := DoublyLinkedList{0, nil, nil}
 		array := table.data
-		for _, nodeData := range array {
+		for i, nodeData := range array {
 			list.InsertEnd(&Node{nodeData, nil, nil})
+			if i+1 != list.Lenght() {
+				t.Errorf("Wrong Lenght got: %v expected: %v",
+					list.Lenght(), i+1)
+			}
 		}
 		output := getDLLDataInSlice(&list)
 		for _, nodeData := range output {
@@ -156,8 +172,12 @@ func TestDeleteEnd1(t *testing.T) {
 	for _, table := range tables {
 		list := DoublyLinkedList{0, nil, nil}
 		array := table.data
-		for _, nodeData := range array {
+		for i, nodeData := range array {
 			list.InsertStart(&Node{nodeData, nil, nil})
+			if i+1 != list.Lenght() {
+				t.Errorf("Wrong Lenght got: %v expected: %v",
+					list.Lenght(), i+1)
+			}
 		}
 		output := getDLLDataInSlice(&list)
 		for i := len(output) - 1; i >= 0; i-- {
@@ -199,8 +219,12 @@ func TestDeleteAt1(t *testing.T) {
 	}
 	for _, table := range tables {
 		list := DoublyLinkedList{0, nil, nil}
-		for _, nodeData := range table.data {
+		for i, nodeData := range table.data {
 			list.InsertEnd(&Node{nodeData, nil, nil})
+			if i+1 != list.Lenght() {
+				t.Errorf("Wrong Lenght got: %v expected: %v",
+					list.Lenght(), i+1)
+			}
 		}
 		deletedNode, err := list.DeleteAt(table.position)
 		if err != nil {
@@ -232,7 +256,7 @@ func TestDeleteAt2(t *testing.T) {
 	}
 }
 
-func TestInsertAt(t *testing.T) {
+func TestInsertAt1(t *testing.T) {
 	tables := []struct {
 		input    []int
 		element  int
@@ -248,8 +272,12 @@ func TestInsertAt(t *testing.T) {
 
 	for _, table := range tables {
 		list := DoublyLinkedList{0, nil, nil}
-		for _, nodeData := range table.input {
+		for i, nodeData := range table.input {
 			list.InsertEnd(&Node{nodeData, nil, nil})
+			if i+1 != list.Lenght() {
+				t.Errorf("Wrong Lenght got: %v expected: %v",
+					list.Lenght(), i+1)
+			}
 		}
 		err := list.InsertAt(&Node{table.element, nil, nil}, table.position)
 		if err != nil {

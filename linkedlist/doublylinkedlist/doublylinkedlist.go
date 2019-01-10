@@ -90,7 +90,7 @@ func (list *DoublyLinkedList) DeleteAt(position int) (int, error) {
 	if list.lenght < position {
 		// validation check for position value
 		// position should not be more than list lenght
-		return 0, errors.New("not that much elements")
+		return 0, errors.New("list don't have that much elements")
 
 	} else if list.lenght == 0 {
 		// if linked list is empty
@@ -101,7 +101,7 @@ func (list *DoublyLinkedList) DeleteAt(position int) (int, error) {
 		current := list.start
 		list.start = nil
 		list.end = nil
-		list.lenght = 0
+		list.lenght--
 		return current.data, nil
 
 	} else if position == 1 {
