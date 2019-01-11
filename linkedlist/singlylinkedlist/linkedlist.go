@@ -29,84 +29,112 @@ func (list *LinkedList) Lenght() int {
 }
 
 func (list *LinkedList) InsertStart(node *Node) {
-	if list.lenght == 0 {
-		list.start = node
-		list.end = node
-	} else {
-		current := list.start
-		list.start = node
-		node.next = current
-	}
-	list.lenght++
+	list.InsertAt(node, 1)
 }
 
 func (list *LinkedList) InsertEnd(node *Node) {
-	if list.lenght == 0 {
+	list.InsertAt(node, list.Lenght()+1)
+}
+
+func (list *LinkedList) InsertAt(node *Node, position int) error {
+	if position > list.lenght+1 || position < 0 {
+		// validation check for position value
+		// position should be between 0 and list lenght + 1
+		return errors.New("invalid position")
+
+	} else if list.lenght == 0 {
+		// if linked list is empty
 		list.start = node
 		list.end = node
-	} else {
+
+	} else if position == list.lenght+1 {
+		// inserting element to last position (InsertEnd)
 		current := list.end
 		current.next = node
 		list.end = node
-	}
-	list.lenght++
-}
 
-func (list *LinkedList) InsertAt(node *Node, position int) {
-	current := list.start
-	currentPrev := list.start
-	for i := 1; i < position; i++ {
-		currentPrev = current
-		current = current.next
+	} else if position == 1 {
+		// inserting element to first position (InsertStart)
+		current := list.start
+		list.start = node
+		node.next = current
+
+	} else {
+		// inserting at nth position
+		current := list.start
+		currentPrev := list.start
+		for i := 1; i < position; i++ {
+			currentPrev = current
+			current = current.next
+		}
+		currentPrev.next = node
+		node.next = current
 	}
-	currentPrev.next = node
-	node.next = current
 	list.lenght++
+	return nil
 }
 
 func (list *LinkedList) DeleteStart() (int, error) {
-	if list.lenght == 0 {
-		return 0, errors.New("List is empty")
-	}
-	current := list.start
-	list.start = current.next
-	list.lenght--
-	return current.data, nil
+	return list.DeleteAt(1)
 }
 
 func (list *LinkedList) DeleteEnd() (int, error) {
-	if list.lenght == 0 {
-		return 0, errors.New("List is empty")
-	}
-
-	current := list.start
-	currentPrev := list.start
-	for {
-		if current.next == nil {
-			break
-		}
-		currentPrev = current
-		current = current.next
-	}
-	currentPrev.next = nil
-	list.lenght--
-	return current.data, nil
+	return list.DeleteAt(list.lenght)
 }
 
 func (list *LinkedList) DeleteAt(position int) (int, error) {
 	if list.lenght < position {
+		// validation check for position value
+		// position should not be more than list lenght
 		return 0, errors.New("list don't have that much elements")
+
+	} else if list.lenght == 0 {
+		// if linked list is empty
+		return 0, errors.New("list is empty")
+
+	} else if list.lenght == 1 {
+		// if linked list only contains one element
+		current := list.start
+		list.start = nil
+		list.end = nil
+		list.lenght--
+		return current.data, nil
+
+	} else if position == 1 {
+		// deleting first element in the linked list (DeleteStart)
+		current := list.start
+		list.start = current.next
+		list.lenght--
+		return current.data, nil
+
+	} else if position == list.lenght {
+		// deleting last element in the linked list (DeleteEnd)
+		current := list.start
+		currentPrev := list.start
+		for {
+			if current.next == nil {
+				break
+			}
+			currentPrev = current
+			current = current.next
+		}
+		currentPrev.next = nil
+		list.lenght--
+		return current.data, nil
+
+	} else {
+		// deleting nth element
+		current := list.start
+		currentPrev := list.start
+		for i := 1; i < position; i++ {
+			currentPrev = current
+			current = current.next
+		}
+		currentPrev.next = current.next
+		current.next = nil
+		list.lenght--
+		return current.data, nil
 	}
-	current := list.start
-	currentPrev := list.start
-	for i := 1; i < position; i++ {
-		currentPrev = current
-		current = current.next
-	}
-	currentPrev.next = current.next
-	current.next = nil
-	list.lenght--
-	return current.data, nil
 }
 
 func (list *LinkedList) DataAt(position int) (int, error) {
