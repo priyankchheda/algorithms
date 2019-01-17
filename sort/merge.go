@@ -1,7 +1,5 @@
 package sort
 
-const cutoff int = 7
-
 // merge function for MergeSort
 func merge(data []int, low int, mid int, high int) {
 	aux := make([]int, high-low+1)

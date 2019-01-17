@@ -2,3 +2,5 @@
 // As this package is only for reference, we have only used
 // integer array as our input data to reduce language complexity.
 package sort
+
+const cutoff int = 7
