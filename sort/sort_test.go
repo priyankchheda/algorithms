@@ -242,3 +242,27 @@ func TestQuick3WaySort(t *testing.T) {
 	testShuffleSort(t, mysort.Quick3WaySort)
 	testShuffleRandom(t, mysort.Quick3WaySort)
 }
+
+func TestQuickSelect(t *testing.T) {
+	tests := []struct {
+		data       []int
+		k          int
+		kthElement int
+	}{
+		{nil, 45, -1},
+		{[]int{}, 34, -1},
+		{[]int{5}, 0, 5},
+		{[]int{5, 8, 2, 9}, 3, 9},
+		{[]int{-9, -3, 9, -12}, 1, -9},
+		{[]int{-9, -7, 6, -1, 78, 34, 9, 2, 89, 345}, 9, 345},
+	}
+
+	for _, test := range tests {
+		output := mysort.QuickSelect(test.data, test.k)
+		if output != test.kthElement {
+			t.Errorf("Incorrect kth element k:%d\n got: %d expected: %d",
+				test.k, output, test.kthElement)
+			break
+		}
+	}
+}
