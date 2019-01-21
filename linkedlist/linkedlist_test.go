@@ -1,18 +1,20 @@
-package main
+package linkedlist_test
 
 import (
 	"testing"
+
+	"github.com/x899/algorithms/linkedlist"
 )
 
-func getSLLDataInSlice(list *LinkedList) []int {
+func getSLLDataInSlice(list *linkedlist.LinkedList) []int {
 	var data []int
-	current := list.start
+	current := list.Start
 	for {
 		if current == nil {
 			break
 		}
-		data = append(data, current.data)
-		current = current.next
+		data = append(data, current.Data)
+		current = current.Next
 	}
 	return data
 }
@@ -28,9 +30,9 @@ func TestInsertStart(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertStart(&Node{nodeData, nil})
+			list.InsertStart(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -56,9 +58,9 @@ func TestInsertEnd(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -89,15 +91,15 @@ func TestInsertAt1(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.input {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
 			}
 		}
-		err := list.InsertAt(&Node{table.element, nil}, table.position)
+		err := list.InsertAt(linkedlist.NewNode(table.element), table.position)
 		if err != nil {
 			t.Errorf("Error: %v\n", err)
 		}
@@ -112,8 +114,8 @@ func TestInsertAt1(t *testing.T) {
 }
 
 func TestInsertAt2(t *testing.T) {
-	list := LinkedList{0, nil, nil}
-	err := list.InsertAt(&Node{6, nil}, 9)
+	list := linkedlist.NewLinkedList()
+	err := list.InsertAt(linkedlist.NewNode(6), 9)
 	if err == nil {
 		t.Errorf("Error: %v", err)
 	}
@@ -129,9 +131,9 @@ func TestHeadTailLenght(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -139,14 +141,14 @@ func TestHeadTailLenght(t *testing.T) {
 		}
 		output := getSLLDataInSlice(&list)
 		head := list.Head()
-		if output[0] != head.data {
-			t.Errorf("Wrong Head expected: %d got: %d", output[0], head.data)
+		if output[0] != head.Data {
+			t.Errorf("Wrong Head expected: %d got: %d", output[0], head.Data)
 		}
 
 		tail := list.Tail()
-		if output[len(output)-1] != tail.data {
+		if output[len(output)-1] != tail.Data {
 			t.Errorf("Wrong Tail expected: %d got: %d",
-				output[len(output)-1], tail.data)
+				output[len(output)-1], tail.Data)
 		}
 		lenght := list.Lenght()
 		if len(output) != lenght {
@@ -166,9 +168,9 @@ func TestDeleteStart1(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -189,7 +191,7 @@ func TestDeleteStart1(t *testing.T) {
 }
 
 func TestDeleteStart2(t *testing.T) {
-	list := LinkedList{0, nil, nil}
+	list := linkedlist.NewLinkedList()
 	deletedNode, err := list.DeleteStart()
 	if err == nil {
 		t.Errorf("Error: no error when deleting from empty list")
@@ -210,9 +212,9 @@ func TestDeleteEnd1(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -233,7 +235,7 @@ func TestDeleteEnd1(t *testing.T) {
 }
 
 func TestDeleteEnd2(t *testing.T) {
-	list := LinkedList{0, nil, nil}
+	list := linkedlist.NewLinkedList()
 	deletedNode, err := list.DeleteEnd()
 	if err == nil {
 		t.Errorf("Error: no error when deleting from empty list")
@@ -258,9 +260,9 @@ func TestDeleteAt1(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -287,7 +289,7 @@ func TestDeleteAt1(t *testing.T) {
 }
 
 func TestDeleteAt2(t *testing.T) {
-	list := LinkedList{0, nil, nil}
+	list := linkedlist.NewLinkedList()
 	deletedNode, err := list.DeleteAt(9)
 	if err == nil {
 		t.Errorf("Error: %v", err)
@@ -311,9 +313,9 @@ func TestDataAt1(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -331,9 +333,9 @@ func TestDataAt1(t *testing.T) {
 }
 
 func TestDataAt2(t *testing.T) {
-	list := LinkedList{0, nil, nil}
+	list := linkedlist.NewLinkedList()
 	for i := 0; i < 10; i++ {
-		list.InsertEnd(&Node{i, nil})
+		list.InsertEnd(linkedlist.NewNode(i))
 	}
 	result, err := list.DataAt(15)
 	if err == nil {
@@ -355,9 +357,9 @@ func TestReverseIterative(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -385,9 +387,9 @@ func TestReverseRecursive(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := LinkedList{0, nil, nil}
+		list := linkedlist.NewLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil})
+			list.InsertEnd(linkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
