@@ -1,18 +1,20 @@
-package main
+package doublylinkedlist_test
 
 import (
 	"testing"
+
+	"github.com/x899/algorithms/doublylinkedlist"
 )
 
-func getDLLDataInSlice(list *DoublyLinkedList) []int {
+func getDLLDataInSlice(list *doublylinkedlist.DoublyLinkedList) []int {
 	var data []int
-	current := list.start
+	current := list.Start
 	for {
 		if current == nil {
 			break
 		}
-		data = append(data, current.data)
-		current = current.next
+		data = append(data, current.Data)
+		current = current.Next
 	}
 	return data
 }
@@ -28,11 +30,11 @@ func TestInsertStart(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := DoublyLinkedList{0, nil, nil}
+		list := doublylinkedlist.NewDoublyLinkedList()
 		array := table.data
 		expected_array := table.expected
 		for i, nodeData := range array {
-			list.InsertStart(&Node{nodeData, nil, nil})
+			list.InsertStart(doublylinkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -58,10 +60,10 @@ func TestInsertEnd(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := DoublyLinkedList{0, nil, nil}
+		list := doublylinkedlist.NewDoublyLinkedList()
 		array := table.data
 		for i, nodeData := range array {
-			list.InsertEnd(&Node{nodeData, nil, nil})
+			list.InsertEnd(doublylinkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -87,10 +89,10 @@ func TestHeadTailLenght(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := DoublyLinkedList{0, nil, nil}
+		list := doublylinkedlist.NewDoublyLinkedList()
 		array := table.data
 		for i, nodeData := range array {
-			list.InsertEnd(&Node{nodeData, nil, nil})
+			list.InsertEnd(doublylinkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -98,14 +100,14 @@ func TestHeadTailLenght(t *testing.T) {
 		}
 		output := getDLLDataInSlice(&list)
 		head := list.Head()
-		if output[0] != head.data {
-			t.Errorf("Wrong Head expected: %d got: %d", output[0], head.data)
+		if output[0] != head.Data {
+			t.Errorf("Wrong Head expected: %d got: %d", output[0], head.Data)
 		}
 
 		tail := list.Tail()
-		if output[len(output)-1] != tail.data {
+		if output[len(output)-1] != tail.Data {
 			t.Errorf("Wrong Tail expected: %d got: %d",
-				output[len(output)-1], tail.data)
+				output[len(output)-1], tail.Data)
 		}
 		lenght := list.Lenght()
 		if len(output) != lenght {
@@ -125,10 +127,10 @@ func TestDeleteStart1(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := DoublyLinkedList{0, nil, nil}
+		list := doublylinkedlist.NewDoublyLinkedList()
 		array := table.data
 		for i, nodeData := range array {
-			list.InsertEnd(&Node{nodeData, nil, nil})
+			list.InsertEnd(doublylinkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -149,7 +151,7 @@ func TestDeleteStart1(t *testing.T) {
 }
 
 func TestDeleteStart2(t *testing.T) {
-	list := DoublyLinkedList{0, nil, nil}
+	list := doublylinkedlist.NewDoublyLinkedList()
 	deletedNode, err := list.DeleteStart()
 	if err == nil {
 		t.Errorf("Error: no error when deleting from empty list")
@@ -170,10 +172,10 @@ func TestDeleteEnd1(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := DoublyLinkedList{0, nil, nil}
+		list := doublylinkedlist.NewDoublyLinkedList()
 		array := table.data
 		for i, nodeData := range array {
-			list.InsertStart(&Node{nodeData, nil, nil})
+			list.InsertStart(doublylinkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -194,7 +196,7 @@ func TestDeleteEnd1(t *testing.T) {
 }
 
 func TestDeleteEnd2(t *testing.T) {
-	list := DoublyLinkedList{0, nil, nil}
+	list := doublylinkedlist.NewDoublyLinkedList()
 	deletedNode, err := list.DeleteEnd()
 	if err == nil {
 		t.Errorf("Error: no error when deleting from empty list")
@@ -218,9 +220,9 @@ func TestDeleteAt1(t *testing.T) {
 		{[]int{367, 834, 242}, 1, []int{834, 242}, 367},
 	}
 	for _, table := range tables {
-		list := DoublyLinkedList{0, nil, nil}
+		list := doublylinkedlist.NewDoublyLinkedList()
 		for i, nodeData := range table.data {
-			list.InsertEnd(&Node{nodeData, nil, nil})
+			list.InsertEnd(doublylinkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
@@ -246,7 +248,7 @@ func TestDeleteAt1(t *testing.T) {
 }
 
 func TestDeleteAt2(t *testing.T) {
-	list := DoublyLinkedList{0, nil, nil}
+	list := doublylinkedlist.NewDoublyLinkedList()
 	deletedNode, err := list.DeleteAt(9)
 	if err == nil {
 		t.Errorf("Error: %v", err)
@@ -271,15 +273,15 @@ func TestInsertAt1(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		list := DoublyLinkedList{0, nil, nil}
+		list := doublylinkedlist.NewDoublyLinkedList()
 		for i, nodeData := range table.input {
-			list.InsertEnd(&Node{nodeData, nil, nil})
+			list.InsertEnd(doublylinkedlist.NewNode(nodeData))
 			if i+1 != list.Lenght() {
 				t.Errorf("Wrong Lenght got: %v expected: %v",
 					list.Lenght(), i+1)
 			}
 		}
-		err := list.InsertAt(&Node{table.element, nil, nil}, table.position)
+		err := list.InsertAt(doublylinkedlist.NewNode(table.element), table.position)
 		if err != nil {
 			t.Errorf("Error: %v\n", err)
 		}
@@ -294,8 +296,8 @@ func TestInsertAt1(t *testing.T) {
 }
 
 func TestInsertAt2(t *testing.T) {
-	list := DoublyLinkedList{0, nil, nil}
-	err := list.InsertAt(&Node{6, nil, nil}, 9)
+	list := doublylinkedlist.NewDoublyLinkedList()
+	err := list.InsertAt(doublylinkedlist.NewNode(6), 9)
 	if err == nil {
 		t.Errorf("Error: %v", err)
 	}
