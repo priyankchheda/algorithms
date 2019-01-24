@@ -221,9 +221,63 @@ func (t *Tree) PostOrder(node *Node, printFunction func(*Node)) {
 	printFunction(node)
 }
 
+func (t *Tree) Height() int {
+	if t.Root == nil {
+		return -1
+	}
+	return t.Root.height()
+}
+
+func (node *Node) height() int {
+	if node == nil {
+		return -1
+	}
+	leftHeight := node.Left.height()
+	rightHeight := node.Right.height()
+	if leftHeight > rightHeight {
+		return leftHeight + 1
+	}
+	return rightHeight + 1
+}
+
+func (t *Tree) LevelOrder() {
+	if t.Root == nil {
+		return
+	}
+	q := NewQueue()
+	q.Enqueue(t.Root)
+	for !q.IsEmpty() {
+		current, _ := q.Dequeue()
+		fmt.Println(current.Data)
+		if current.Left != nil {
+			q.Enqueue(current.Left)
+		}
+		if current.Right != nil {
+			q.Enqueue(current.Right)
+		}
+	}
+}
+
+func (node *Node) isBSTNode(minValue, maxValue int) bool {
+	if node == nil {
+		return true
+	}
+	if node.Data >= minValue &&
+		node.Data < maxValue &&
+		node.Left.isBSTNode(minValue, node.Data) &&
+		node.Right.isBSTNode(node.Data, maxValue) {
+		return true
+	}
+	return false
+}
+
+func (t *Tree) IsBST() bool {
+	return t.Root.isBSTNode(1, 10000000)
+}
+
 // Main Function
 func main() {
-	dataSet := []int{1, 2, 3, 4, 5}
+	dataSet := []int{3, 4, 2, 1, 5, 6, 8, 12, 10, 9, 11, 14, 16}
 	tree := NewBST()
 	for _, data := range dataSet {
 		err := tree.Insert(data)
@@ -235,6 +289,11 @@ func main() {
 	fmt.Print("Sorted values: | ")
 	tree.InOrder(tree.Root, func(n *Node) { fmt.Print(n.Data) })
 	fmt.Println()
+	fmt.Println("IsBST: ", tree.IsBST())
+	fmt.Println("Level Order")
+	tree.LevelOrder()
+	fmt.Println()
+	fmt.Println("height: ", tree.Height())
 
 	s := 4
 	fmt.Println("Find Node: ", s)
@@ -257,6 +316,7 @@ func main() {
 	fmt.Println("max: ", max)
 	min, err := tree.FindMin()
 	fmt.Println("min: ", min)
+	fmt.Println("height: ", tree.Height())
 
 	fmt.Println("Single-node tree")
 	tree = &Tree{}
@@ -265,9 +325,11 @@ func main() {
 	fmt.Println("After insert:")
 	tree.InOrder(tree.Root, func(n *Node) { fmt.Print(n.Data) })
 	fmt.Println()
+	fmt.Println("height: ", tree.Height())
 
 	tree.Delete(6)
 	fmt.Println("After delete:")
 	tree.InOrder(tree.Root, func(n *Node) { fmt.Print(n.Data) })
 	fmt.Println()
+	fmt.Println("height: ", tree.Height())
 }
