@@ -32,6 +32,8 @@ func (node *Node) insertNode(data int) error {
 			return nil
 		}
 		return node.Right.insertNode(data)
+
+	default:
+		return nil
 	}
-	return nil
 }
