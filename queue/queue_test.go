@@ -1,7 +1,9 @@
-package main
+package queue_test
 
 import (
 	"testing"
+
+	"github.com/x899/algorithms/queue"
 )
 
 func TestEnqueueDequeue(t *testing.T) {
@@ -15,7 +17,7 @@ func TestEnqueueDequeue(t *testing.T) {
 	}
 
 	for _, table := range tables {
-		q := NewQueue()
+		q := queue.NewQueue()
 		for i, element := range table.data {
 			q.Enqueue(element)
 			if i+1 != q.Size() {
@@ -38,7 +40,7 @@ func TestEnqueueDequeue(t *testing.T) {
 }
 
 func TestDequeueEmpty(t *testing.T) {
-	q := NewQueue()
+	q := queue.NewQueue()
 	removedItem, err := q.Dequeue()
 	if err == nil {
 		t.Errorf("error: dequeuing from empty queue")

@@ -1,5 +1,5 @@
 // Package queue is a implementation of queue data structure in go
-package main
+package queue
 
 import "errors"
 
