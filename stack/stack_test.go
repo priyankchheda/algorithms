@@ -8,12 +8,12 @@ import (
 
 func TestPushPeekPop(t *testing.T) {
 	tests := []struct {
-		data []int
+		data []string
 	}{
-		{[]int{67}},
-		{[]int{1, 2, 3, 4, 5}},
-		{[]int{67, 34, 23, 78, 78, 12}},
-		{[]int{367, 834, 242}},
+		{[]string{"stack test"}},
+		{[]string{"a", "b", "c", "d", "e"}},
+		{[]string{"67", "34", "23", "78", "78", "12"}},
+		{[]string{"367", "834", "242"}},
 	}
 
 	for _, test := range tests {
@@ -54,7 +54,7 @@ func TestPeekPopEmpty(t *testing.T) {
 	if err == nil {
 		t.Errorf("error: peeking from empty stack")
 	}
-	if peekItem != 0 {
+	if peekItem != "" {
 		t.Errorf("wrong peeking item expected: 0 got: %v", peekItem)
 	}
 
@@ -62,7 +62,7 @@ func TestPeekPopEmpty(t *testing.T) {
 	if err == nil {
 		t.Errorf("error: popping from empty stack")
 	}
-	if removedItem != 0 {
+	if removedItem != "" {
 		t.Errorf("wrong removed item expected: 0 got: %v", removedItem)
 	}
 }

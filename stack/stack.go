@@ -7,36 +7,36 @@ import (
 
 // Stack struct contains data and methods are stack operations
 type Stack struct {
-	array []int
+	array []string
 }
 
 // NewStack creates new empty integer stack
 func NewStack() Stack {
-	return Stack{array: make([]int, 0)}
+	return Stack{array: make([]string, 0)}
 }
 
 // Push element in the stack
-func (s *Stack) Push(value int) {
+func (s *Stack) Push(value string) {
 	s.array = append(s.array, value)
 }
 
 // Pop removes element from the stack. Returns error if the stack is empty
-func (s *Stack) Pop() (removedElement int, err error) {
+func (s *Stack) Pop() (removedElement string, err error) {
 	if s.IsEmpty() {
-		return 0, errors.New("stack is empty")
+		return "", errors.New("stack is empty")
 	}
 	arraySize := len(s.array)
 	removedElement = s.array[arraySize-1]
-	s.array[arraySize-1] = 0 // prevent memory leak
+	s.array[arraySize-1] = "" // prevent memory leak
 	s.array = s.array[:arraySize-1]
 	return removedElement, nil
 }
 
 // Peek returns top element from the stack without removing it. Returns error
 // if the stack is empty.
-func (s *Stack) Peek() (topElement int, err error) {
+func (s *Stack) Peek() (topElement string, err error) {
 	if s.IsEmpty() {
-		return 0, errors.New("stack is empty")
+		return "", errors.New("stack is empty")
 	}
 	return s.array[len(s.array)-1], nil
 }
