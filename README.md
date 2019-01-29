@@ -4,7 +4,7 @@ Data Structure Libraries and Algorithms implementation in Go
 **Disclaimer**<br />
 This repository is meant to be used as a reference to learn data structure and
 algorithm in Go programming language.<br />To reduce unnecessary language
-complexity, all the programs only use integer dataset (int or []int).
+complexity, all the programs only uses integer or string dataset.
 
 ## Data structure
 * Sorting Algorithms
