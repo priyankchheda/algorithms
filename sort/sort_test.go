@@ -82,6 +82,11 @@ func TestMergeSortBottomUp(t *testing.T) {
 	testSortRandom(t, mysort.MergeSortBottomUp)
 }
 
+func TestHeapSort(t *testing.T) {
+	testSort(t, mysort.HeapSort)
+	testSortRandom(t, mysort.HeapSort)
+}
+
 func TestMergeSort(t *testing.T) {
 	tests := []struct {
 		original []int
