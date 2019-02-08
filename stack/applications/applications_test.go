@@ -27,3 +27,25 @@ func TestInfixToPostfix(t *testing.T) {
 		}
 	}
 }
+
+func TestInfixToPrefix(t *testing.T) {
+	tests := []struct {
+		infix  string
+		prefix string
+	}{
+		{"3 + 34", "+ 3 34"},
+		{"34 + 57 * 234 + 12", "+ 34 + * 57 234 12"},
+		{"(34 + 57) * (234 + 12)", "* + 34 57 + 234 12"},
+		{"34 * 57 + 234 * 12", "+ * 34 57 * 234 12"},
+		{"34 + 57 + 234 + 12", "+ 34 + 57 + 234 12"},
+		{"( 2 + 1 ) * 45 - ( 20 - 7 ) * ( 4 + 12 )", "- * + 2 1 45 * - 20 7 + 4 12"},
+	}
+
+	for _, test := range tests {
+		prefix := applications.InfixToPrefix(test.infix)
+		if prefix != test.prefix {
+			t.Errorf("wrong output expected: %s got: %s",
+				test.prefix, prefix)
+		}
+	}
+}
