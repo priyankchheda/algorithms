@@ -1,6 +1,7 @@
 package applications
 
 import (
+	"errors"
 	"strconv"
 )
 
@@ -40,4 +41,36 @@ func reverse(s string) string {
 		r[i], r[j] = r[j], r[i]
 	}
 	return string(r)
+}
+
+// computeOperation computes the operation on two given operand and a operator
+// and returns the result
+func computeOperation(operand1Str, operand2Str, operator string) (string, error) {
+	operand1, err := strconv.Atoi(operand1Str)
+	if err != nil {
+		return "", errors.New(
+			"Unable to convert operand " + operand1Str + " to string")
+	}
+
+	operand2, err := strconv.Atoi(operand2Str)
+	if err != nil {
+		return "", errors.New(
+			"Unable to convert operand " + operand1Str + " to string")
+	}
+
+	var result int
+	switch operator {
+	case "+":
+		result = operand1 + operand2
+	case "-":
+		result = operand1 - operand2
+	case "*":
+		result = operand1 * operand2
+	case "/":
+		result = operand1 / operand2
+	case "%":
+		result = operand1 % operand2
+	}
+
+	return strconv.Itoa(result), nil
 }
