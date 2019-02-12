@@ -15,7 +15,11 @@ complexity, all the programs only uses integer or string dataset.
 	* [Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
 	* [Quick Select](https://en.wikipedia.org/wiki/Quickselect)
 	* [Shell Sort](https://en.wikipedia.org/wiki/Shellsort)
+	* [Heap Sort](https://en.wikipedia.org/wiki/Heapsort)
 * [Stack (Array Implementation)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+	* Infix to Postfix
+	* Infix to Prefix
+	* Infix Evaluation
 * [Queue (Array Implementation)](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))
 * LinkedList
 	* [Singly Linked List](https://en.wikipedia.org/wiki/Linked_list)
@@ -24,13 +28,15 @@ complexity, all the programs only uses integer or string dataset.
 * [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
 
 ## TO DO
+* Vertical Order Traversal of Tree
+* Deque using circular array
+* Binary Search algorithm
 * Tree Varient
 * Graph Varient
 * [cocktail sort](https://en.wikipedia.org/wiki/Cocktail_shaker_sort)
 * [gnome sort](https://en.wikipedia.org/wiki/Gnome_sort)
 * [comb sort](https://en.wikipedia.org/wiki/Comb_sort)
 * [odd-even sort](https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort)
-* [heap sort](https://en.wikipedia.org/wiki/Heapsort)
 * [counting sort](https://en.wikipedia.org/wiki/Counting_sort)
 
 ## Contribution
