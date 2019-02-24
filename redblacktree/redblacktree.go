@@ -30,3 +30,38 @@ func NewRBTree() *RBTree {
 func NewNode(data, color int) *Node {
 	return &Node{data, color, nil, nil, nil}
 }
+
+// nodeColor returns the color of node
+func nodeColor(node *Node) int {
+	if node == nil {
+		return BLACK
+	}
+	return node.Color
+}
+
+// uncle returns the uncle of node
+func (node *Node) uncle() *Node {
+	if node == nil || node.Parent == nil || node.Parent.Parent == nil {
+		return nil
+	}
+	return node.Parent.sibling()
+}
+
+// sibling returns the sibling of node
+func (node *Node) sibling() *Node {
+	if node == nil || node.Parent == nil {
+		return nil
+	}
+	if node == node.Parent.Left {
+		return node.Parent.Right
+	}
+	return node.Parent.Left
+}
+
+// grandparent returns the grandparent of node
+func (node *Node) grandparent() *Node {
+	if node == nil || node.Parent == nil {
+		return nil
+	}
+	return node.Parent.Parent
+}
