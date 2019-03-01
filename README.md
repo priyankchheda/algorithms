@@ -26,12 +26,19 @@ complexity, all the programs only uses integer or string dataset.
 	* [Doubly Linked List](https://en.wikipedia.org/wiki/Doubly_linked_list)
 * [Shuffle (Using Fisher-Yates (Knuth) shuffling algorithm)](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
 * [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
+* [Binary Heap](https://en.wikipedia.org/wiki/Binary_heap)
+    * Min Heap
+    * Max Heap
+* [Red Black Tree](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree)
+* Search
+    * [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 
 ## TO DO
 * Vertical Order Traversal of Tree
 * Order Statistics of Tree
+* Red Black Tree Deletion
+* B-Tree
 * Deque using circular array
-* Binary Search algorithm
 * Tree Varient
 * Graph Varient
 * [cocktail sort](https://en.wikipedia.org/wiki/Cocktail_shaker_sort)
