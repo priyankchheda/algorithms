@@ -6,6 +6,9 @@ This repository is meant to be used as a reference to learn data structure and
 algorithm in Go programming language.<br />To reduce unnecessary language
 complexity, all the programs only uses integer or string dataset.
 
+**Documentation**<br />
+[Click to view goDoc Documentation](https://godoc.org/github.com/x899/algorithms)
+
 ## Data structure
 * Sorting Algorithms
 	* [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
