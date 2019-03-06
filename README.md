@@ -1,6 +1,8 @@
 # Algorithms
 Data Structure Libraries and Algorithms implementation in Go
 
+[![GoDoc](https://godoc.org/github.com/x899/algorithms?status.svg)](https://godoc.org/github.com/x899/algorithms) [![Go Report Card](https://goreportcard.com/badge/github.com/x899/algorithms)](https://goreportcard.com/report/github.com/x899/algorithms)
+
 **Disclaimer**<br />
 This repository is meant to be used as a reference to learn data structure and
 algorithm in Go programming language.<br />To reduce unnecessary language
