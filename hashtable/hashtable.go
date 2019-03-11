@@ -1,7 +1,5 @@
 package hashtable
 
-import "fmt"
-
 type Record struct {
 	Key   int
 	Value int
@@ -31,17 +29,6 @@ func hashFunction(key, size int) int {
 	return key % size
 }
 
-func (h *HashTable) Display() {
-	for i, node := range h.Hash {
-		fmt.Printf("%d: ", i)
-		for node != nil {
-			fmt.Printf("[%d, %d] -> ", node.Key, node.Value)
-			node = node.Next
-		}
-		fmt.Println("nil")
-	}
-}
-
 func (h *HashTable) put(key, value int) bool {
 	index := hashFunction(key, len(h.Hash))
 	iterator := h.Hash[index]
@@ -69,6 +56,18 @@ func (h *HashTable) Put(key, value int) {
 	if sizeChanged == true {
 		h.checkLoadFactorAndUpdate()
 	}
+}
+
+func (h *HashTable) Get(key int) (bool, int) {
+	index := hashFunction(key, len(h.Hash))
+	iterator := h.Hash[index]
+	for iterator != nil {
+		if iterator.Key == key {
+			return true, iterator.Value
+		}
+		iterator = iterator.Next
+	}
+	return false, 0
 }
 
 func (h *HashTable) getLoadFactor() float64 {
