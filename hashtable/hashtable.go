@@ -70,6 +70,40 @@ func (h *HashTable) Get(key int) (bool, int) {
 	return false, 0
 }
 
+func (h *HashTable) del(key int) bool {
+	index := hashFunction(key, len(h.Hash))
+	iterator := h.Hash[index]
+	if iterator == nil {
+		return false
+	}
+	if iterator.Key == key {
+		h.Hash[index] = iterator.Next
+		h.Size -= 1
+		return true
+	} else {
+		prev := iterator
+		iterator = iterator.Next
+		for iterator != nil {
+			if iterator.Key == key {
+				prev.Next = iterator.Next
+				h.Size -= 1
+				return true
+			}
+			prev = iterator
+			iterator = iterator.Next
+		}
+		return false
+	}
+}
+
+func (h *HashTable) Del(key int) bool {
+	sizeChanged := h.del(key)
+	if sizeChanged == true {
+		h.checkLoadFactorAndUpdate()
+	}
+	return sizeChanged
+}
+
 func (h *HashTable) getLoadFactor() float64 {
 	return float64(h.Size) / float64(len(h.Hash))
 }
