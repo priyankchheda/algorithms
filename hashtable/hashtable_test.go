@@ -40,3 +40,20 @@ func TestGet(t *testing.T) {
 		t.Errorf("wrong output got: %t expected: false", present)
 	}
 }
+
+func TestDel(t *testing.T) {
+	ht := hashtable.CreateHashTable()
+	ht.Put(1, 2)
+	result := ht.Del(1)
+	if result == false {
+		t.Errorf("wrong output got: %t expected: true", result)
+	}
+	result = ht.Del(1)
+	if result == true {
+		t.Errorf("wrong output got: %t expected: false", result)
+	}
+	result = ht.Del(3)
+	if result == true {
+		t.Errorf("wrong output got: %t expected: false", result)
+	}
+}
