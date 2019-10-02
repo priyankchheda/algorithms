@@ -1,8 +1,9 @@
 package dictionary_test
 
 import (
-	"algorithms-1/dictionary"
 	"testing"
+
+	"github.com/x899/algorithms/dictionary"
 )
 
 func TestEmptyDictionary(t *testing.T) {
