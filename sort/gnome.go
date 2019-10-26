@@ -1,5 +1,9 @@
 package sort
 
+
+// The gnome sort is a sorting algorithm which is similar
+// to insertion sort in that it works with one item at a time
+// but gets the item to the proper place by a series of swaps.
 func GnomeSort(data []int) {
 	index := 0
 	for index < len(data) {
