@@ -47,9 +47,7 @@ complexity, all the programs only uses integer or string dataset.
 * Tree Varient
 * Graph Varient
 * [cocktail sort](https://en.wikipedia.org/wiki/Cocktail_shaker_sort)
-* [gnome sort](https://en.wikipedia.org/wiki/Gnome_sort)
 * [comb sort](https://en.wikipedia.org/wiki/Comb_sort)
-* [odd-even sort](https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort)
 * [counting sort](https://en.wikipedia.org/wiki/Counting_sort)
 
 ## Contribution
