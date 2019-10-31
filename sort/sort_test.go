@@ -276,3 +276,8 @@ func TestQuickSelect(t *testing.T) {
 		}
 	}
 }
+
+func TestOddEvenSort(t *testing.T) {
+	testSort(t, mysort.OddEvenSort)
+	testSortRandom(t, mysort.OddEvenSort)
+}
