@@ -1,4 +1,4 @@
-// Package minheap is an implementation of minheap data structure in go
+// Package minheap is an implementation of minheap data structure in go.
 package minheap
 
 import "errors"
@@ -24,7 +24,7 @@ func BuildHeap(data []int) *Heap {
 	return &heap
 }
 
-// NewMinHeap creates new empty 1-indexed heap
+// NewHeap creates new empty 1-indexed heap
 func NewHeap() *Heap {
 	heap := Heap{arr: make([]int, 0)}
 	heap.arr = append(heap.arr, -99)

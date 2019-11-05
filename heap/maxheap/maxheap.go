@@ -24,7 +24,7 @@ func BuildHeap(data []int) *Heap {
 	return &heap
 }
 
-// NewMinHeap creates new empty 1-indexed heap
+// NewHeap creates new empty 1-indexed heap
 func NewHeap() *Heap {
 	heap := Heap{arr: make([]int, 0)}
 	heap.arr = append(heap.arr, -99)
@@ -42,7 +42,7 @@ func (h *Heap) Insert(d int) {
 	h.swim(len(h.arr) - 1)
 }
 
-// ExtractMin returns the minimum value (i.e. root) in the heap and removes it
+// ExtractMax returns the maximum value (i.e. root) in the heap and removes it
 // from the heap. Returns error, if heap is empty
 func (h *Heap) ExtractMax() (int, error) {
 	if h.Length() <= 0 {
@@ -55,7 +55,7 @@ func (h *Heap) ExtractMax() (int, error) {
 	return maxvalue, nil
 }
 
-// Min returns the minimum value (i.e. root) in the heap, without removing it.
+// Max returns the maximum value (i.e. root) in the heap, without removing it.
 // Returns error, if heap is empty
 func (h *Heap) Max() (int, error) {
 	if h.Length() <= 0 {
@@ -77,7 +77,7 @@ func (h *Heap) swim(k int) {
 	}
 }
 
-// swim moves element at index k downward to maintain heap invariant
+// sink moves element at index k downward to maintain heap invariant
 func (h *Heap) sink(k int) {
 	min := k
 	c := k * 2
