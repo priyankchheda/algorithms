@@ -8,7 +8,7 @@ two adjacent red nodes (A red node cannot have a red parent or red child).
 Every path from a node (including root) to any of its descendant NULL node has
 the same number of black nodes.
 
-Why Red-Black Trees?
+Why Red-Black Trees
 
 Most of the BST operations (e.g., search, max, min, insert, delete.. etc)
 take O(h) time where h is the height of the BST. The cost of these
