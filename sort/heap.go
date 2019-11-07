@@ -28,10 +28,11 @@ func heapify(arr []int, root int, length int) {
 	}
 }
 
-// Heap sort is a comparison based sorting technique based on Binary Heap
+// HeapSort is a comparison based sorting technique based on Binary Heap
 // data structure. It is similar to selection sort where we first find the
 // maximum element and place the maximum element at the end. We repeat the
-// same process for remaining element.
+// same process for remaining element. Heap Sort is not stable, In-place
+// sorting algorithm with guarantee NlogN time complexity in worst-case.
 func HeapSort(data []int) {
 	buildHeap(data)
 	for i := len(data) - 1; i > 0; i-- {
