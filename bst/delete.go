@@ -4,6 +4,12 @@ import "errors"
 
 // Delete deletes a node with said data such that the binary search tree
 // property is still maintained.
+//
+// The main problem with BST deletion (Hibbard Deletion) is that it is not
+// symmetric. After many insertion and deletion BST become less balance.
+// Researchers proved that after sufficiently long number of random insert and
+// delete height of the tree becomes sqrt(n) . so now every operation (search,
+// insert, delete) will take sqrt(n) time which is not good compare to O(logn).
 func (t *Tree) Delete(data int) error {
 	if t.Root == nil {
 		return errors.New("can not delete from an empty tree")
