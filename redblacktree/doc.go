@@ -28,5 +28,12 @@ to O(logn) .
 This is very long standing(around 50 years) open problem to efficient
 symmetric delete for BST. for guaranteed balanced tree, we have to use
 RedBlack Tree etc.
+
+Properties
+
+	- No Node has two red links connected to it.
+	- Every path from root to null link has the same number of black links.
+	- Red links lean left.
+
 */
 package redblacktree
