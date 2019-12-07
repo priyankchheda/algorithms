@@ -99,3 +99,20 @@ func (s *Set) IsEqual(t *Set) bool {
 	}
 	return equal
 }
+
+//IsSubset tests whether t is a subset of s.
+func (s *Set) IsSubset(t *Set) bool {
+	subset := true
+	for item := range t.m {
+		_, subset = s.m[item]
+		if !subset {
+			break
+		}
+	}
+	return subset
+}
+
+// IsSuperset tests whether t is a superset of s.
+func (s *Set) IsSuperset(t *Set) bool {
+	return t.IsSubset(s)
+}

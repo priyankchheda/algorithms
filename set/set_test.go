@@ -183,3 +183,37 @@ func TestIsEqual(t *testing.T) {
 		t.Error("IsEqual: set a and b are not equal. However it returns true")
 	}
 }
+
+func TestIsSubset(t *testing.T) {
+	s := set.NewSet()
+	s.Add(1, 2, 3, 4)
+	u := set.NewSet()
+	u.Add(1, 2, 3)
+
+	ok := s.IsSubset(u)
+	if !ok {
+		t.Error("IsSubset: u is a subset of s. However it returns false")
+	}
+
+	ok = u.IsSubset(s)
+	if ok {
+		t.Error("IsSubset: s is not a subset of u. However it returns true")
+	}
+}
+
+func TestIsSuperset(t *testing.T) {
+	s := set.NewSet()
+	s.Add(1, 2, 3, 4)
+	u := set.NewSet()
+	u.Add(1, 2, 3)
+
+	ok := u.IsSuperset(s)
+	if !ok {
+		t.Error("IsSuperset: u is a superset of s. However it returns false")
+	}
+
+	ok = s.IsSuperset(u)
+	if ok {
+		t.Error("IsSuperset: s is not a superset of u. However it returns true")
+	}
+}
