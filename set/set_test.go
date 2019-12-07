@@ -149,3 +149,37 @@ func TestIsEmpty(t *testing.T) {
 		t.Error("IsEmpty: set is filled, it should be false")
 	}
 }
+
+func TestIsEqual(t *testing.T) {
+	a := set.NewSet()
+	a.Add(1, 2, 3)
+	b := set.NewSet()
+	b.Add(1, 2, 3)
+
+	ok := a.IsEqual(b)
+	if !ok {
+		t.Error("IsEqual: set a and b are equal. However it returns false")
+	}
+
+	// same size, different content
+	a = set.NewSet()
+	a.Add(1, 2, 3)
+	b = set.NewSet()
+	b.Add(4, 5, 6)
+
+	ok = a.IsEqual(b)
+	if ok {
+		t.Error("IsEqual: set a and b are not equal. However it returns true")
+	}
+
+	// different size, similar content
+	a = set.NewSet()
+	a.Add(1, 2, 3)
+	b = set.NewSet()
+	b.Add(1, 2, 3, 4)
+
+	ok = a.IsEqual(b)
+	if ok {
+		t.Error("IsEqual: set a and b are not equal. However it returns true")
+	}
+}

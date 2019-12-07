@@ -1,6 +1,8 @@
 package set
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Set defines a non-thread safe set data structure
 type Set struct {
@@ -79,4 +81,21 @@ func (s *Set) Clear() {
 // IsEmpty reports whether the set is empty.
 func (s *Set) IsEmpty() bool {
 	return s.Size() == 0
+}
+
+// IsEqual tests whether s and t are same in size and have exactly same
+// content.
+func (s *Set) IsEqual(t *Set) bool {
+	if s.Size() != t.Size() {
+		return false
+	}
+
+	equal := true
+	for item := range t.m {
+		_, equal = s.m[item]
+		if !equal {
+			break
+		}
+	}
+	return equal
 }
