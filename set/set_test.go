@@ -1,6 +1,7 @@
 package set_test
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/x899/algorithms/set"
@@ -215,5 +216,43 @@ func TestIsSuperset(t *testing.T) {
 	ok = s.IsSuperset(u)
 	if ok {
 		t.Error("IsSuperset: s is not a superset of u. However it returns true")
+	}
+}
+
+func TestString(t *testing.T) {
+	s := set.NewSet()
+	if s.String() != "[]" {
+		t.Errorf("String: output is not what is excepted '%s'", s.String())
+	}
+
+	s.Add(1, 2, 3, 4)
+	if !strings.HasPrefix(s.String(), "[") {
+		t.Error("String: output should begin with a square bracket")
+	}
+
+	if !strings.HasSuffix(s.String(), "]") {
+		t.Error("String: output should end with a square bracket")
+	}
+}
+
+func TestList(t *testing.T) {
+	s := set.NewSet()
+	if len(s.List()) != 0 {
+		t.Errorf("len of list excepted - 0, got - '%v'", s.List())
+	}
+
+	s.Add(1, 2, 3, 4)
+	if len(s.List()) != 4 {
+		t.Errorf("len of list excepted - 4, got - '%v'", s.List())
+	}
+}
+
+func TestCopy(t *testing.T) {
+	s := set.NewSet()
+	s.Add(1, 2, 3, 4, 5)
+	u := s.Copy()
+
+	if !s.IsEqual(u) {
+		t.Error("Copy: set s and u are not equal")
 	}
 }

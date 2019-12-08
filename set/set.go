@@ -2,6 +2,7 @@ package set
 
 import (
 	"fmt"
+	"strings"
 )
 
 // Set defines a non-thread safe set data structure
@@ -115,4 +116,33 @@ func (s *Set) IsSubset(t *Set) bool {
 // IsSuperset tests whether t is a superset of s.
 func (s *Set) IsSuperset(t *Set) bool {
 	return t.IsSubset(s)
+}
+
+// Copy returns a new Set with a copy of s.
+func (s *Set) Copy() *Set {
+	u := NewSet()
+	for item := range s.m {
+		u.Add(item)
+	}
+	return u
+}
+
+// String returns a string representation of s
+func (s *Set) String() string {
+	t := make([]string, 0, s.Size())
+	for item := range s.m {
+		t = append(t, fmt.Sprintf("%v", item))
+	}
+
+	return fmt.Sprintf("[%s]", strings.Join(t, ", "))
+}
+
+// List returns a slice of all items.
+func (s *Set) List() []int {
+	list := make([]int, 0, s.Size())
+
+	for item := range s.m {
+		list = append(list, item)
+	}
+	return list
 }
