@@ -1,35 +1,35 @@
-package dictionary_test
+package trie_test
 
 import (
 	"testing"
 
-	"github.com/x899/algorithms/dictionary"
+	"github.com/x899/algorithms/trie"
 )
 
-func TestEmptyDictionary(t *testing.T) {
-	var dict = dictionary.NewDictionary()
+func TestEmptyTrie(t *testing.T) {
+	var dict = trie.NewTrie()
 	if dict.Size() != 0 {
-		t.Errorf("dictionary should be empty")
+		t.Errorf("trie should be empty")
 	}
 
 }
 func TestInsertingSame(t *testing.T) {
-	var dict = dictionary.NewDictionary()
+	var dict = trie.NewTrie()
 
 	if dict.Insert("abc") == false {
-		t.Errorf("dictionary should be empty")
+		t.Errorf("trie should be empty")
 	}
 	if dict.Insert("abc") == true {
-		t.Errorf("abc should already be in dictionary")
+		t.Errorf("abc should already be in trie")
 	}
 
 }
 
 func TestRetrieve(t *testing.T) {
-	var dict = dictionary.NewDictionary()
+	var dict = trie.NewTrie()
 
 	if dict.Insert("abc") == false {
-		t.Errorf("dictionary should be empty")
+		t.Errorf("trie should be empty")
 	}
 	if dict.Insert("abb") == false {
 		t.Errorf("abb should't be in directory")
@@ -54,12 +54,12 @@ func TestRetrieve(t *testing.T) {
 }
 
 func TestContains(t *testing.T) {
-	var dict = dictionary.NewDictionary()
+	var dict = trie.NewTrie()
 	if dict.Insert("abc") == false {
-		t.Errorf("dictionary should be empty")
+		t.Errorf("trie should be empty")
 	}
 	if dict.Contains("abc") == false {
-		t.Errorf("abc should be in dictionary")
+		t.Errorf("abc should be in trie")
 	}
 
 	var words = []string{
@@ -97,12 +97,12 @@ func TestContains(t *testing.T) {
 
 }
 func TestDelete(t *testing.T) {
-	var dict = dictionary.NewDictionary()
+	var dict = trie.NewTrie()
 	if dict.Insert("abc") == false {
-		t.Errorf("dictionary should be empty")
+		t.Errorf("trie should be empty")
 	}
 	if dict.Delete("abc") == false {
-		t.Errorf("abc should be in dictionary")
+		t.Errorf("abc should be in trie")
 	}
 
 	var words = []string{

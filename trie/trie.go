@@ -1,5 +1,5 @@
-// Package dictionary is word dictionary implementation using trie in go
-package dictionary
+// Package trie is word dictionary implementation using trie in go
+package trie
 
 // trieNode saves trie structure
 type trieNode struct {
@@ -7,15 +7,15 @@ type trieNode struct {
 	isEnd    bool
 }
 
-// Dictionary struct contains data and methods
-type Dictionary struct {
+// Trie struct contains data and methods
+type Trie struct {
 	root      *trieNode
 	wordCount int
 }
 
-// NewDictionary creates new instance of dictionary
-func NewDictionary() *Dictionary {
-	return &Dictionary{
+// NewTrie creates new instance of trie
+func NewTrie() *Trie {
+	return &Trie{
 		root: &trieNode{
 			childMap: map[rune]*trieNode{},
 			isEnd:    false,
@@ -24,14 +24,14 @@ func NewDictionary() *Dictionary {
 	}
 }
 
-// Size returns word count in dictionary
-func (pr *Dictionary) Size() int {
+// Size returns word count in trie
+func (pr *Trie) Size() int {
 	return pr.wordCount
 }
 
-// Insert inserts new word in dictionary
+// Insert inserts new word in trie
 // returns false if this word already present
-func (pr *Dictionary) Insert(word string) bool {
+func (pr *Trie) Insert(word string) bool {
 	node := pr.root
 	for _, ch := range word {
 		if newNode, ok := node.childMap[ch]; ok {
@@ -52,9 +52,9 @@ func (pr *Dictionary) Insert(word string) bool {
 	return true
 }
 
-// InsertAll inserts all words in dictionary
-// returns number of words actually inserted
-func (pr *Dictionary) InsertAll(words []string) int {
+// InsertAll inserts all words in trie returns number of words actually
+// inserted.
+func (pr *Trie) InsertAll(words []string) int {
 	var res = 0
 	for _, word := range words {
 		if pr.Insert(word) {
@@ -64,8 +64,8 @@ func (pr *Dictionary) InsertAll(words []string) int {
 	return res
 }
 
-// Retrieve retrieves all words in dictionary starting with prefix
-func (pr *Dictionary) Retrieve(prefix string) []string {
+// Retrieve retrieves all words in trie starting with prefix.
+func (pr *Trie) Retrieve(prefix string) []string {
 	node, depth := longestMatch(prefix, pr.root)
 	if depth != len(prefix) {
 		return []string{}
@@ -73,15 +73,14 @@ func (pr *Dictionary) Retrieve(prefix string) []string {
 	return allChild(prefix, node)
 }
 
-// Contains checks if given word is in dictionary
-func (pr *Dictionary) Contains(word string) bool {
+// Contains checks if given word is in trie.
+func (pr *Trie) Contains(word string) bool {
 	node, depth := longestMatch(word, pr.root)
 	return depth == len(word) && node.isEnd
 }
 
-// Delete deletes given word from dictionary
-// returns false if word is'n in dictionary
-func (pr *Dictionary) Delete(word string) bool {
+// Delete deletes given word from trie. Returns false if word is not in trie.
+func (pr *Trie) Delete(word string) bool {
 	node, depth := longestMatch(word, pr.root)
 	if depth == len(word) && node.isEnd {
 		node.isEnd = false
