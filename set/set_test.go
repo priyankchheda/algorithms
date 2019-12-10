@@ -256,3 +256,53 @@ func TestCopy(t *testing.T) {
 		t.Error("Copy: set s and u are not equal")
 	}
 }
+
+func TestMerge(t *testing.T) {
+	s := set.NewSet()
+	s.Add(1, 2, 3)
+	r := set.NewSet()
+	r.Add(3, 4, 5)
+	s.Merge(r)
+
+	if s.Size() != 5 {
+		t.Error("Merge: the set doesn't have all items in it.")
+	}
+
+	if !s.Has(1, 2, 3, 4, 5) {
+		t.Error("Merge: merged items are not availabile in the set.")
+	}
+}
+
+func TestSeparate(t *testing.T) {
+	s := set.NewSet()
+	s.Add(1, 2, 3)
+	r := set.NewSet()
+	r.Add(3, 5)
+	s.Separate(r)
+
+	if s.Size() != 2 {
+		t.Error("Separate: the set doesn't have all items in it.")
+	}
+
+	if !s.Has(1, 2) {
+		t.Error("Separate: items after separation are not availabile in the set.")
+	}
+}
+
+func TestUnion(t *testing.T) {
+	s1 := set.NewSet()
+	s1.Add(1, 2, 3)
+	s2 := set.NewSet()
+	s2.Add(4, 5, 6)
+	s3 := set.NewSet()
+	s3.Add(1, 5, 7)
+
+	u := set.Union(s1, s2, s3)
+	if u.Size() != 7 {
+		t.Errorf("expected size 7 got %v", u.Size())
+	}
+
+	if !u.Has(1, 2, 3, 4, 5, 6, 7) {
+		t.Error("merged items are not availabile in union set")
+	}
+}

@@ -146,3 +146,33 @@ func (s *Set) List() []int {
 	}
 	return list
 }
+
+// Merge is like Union, however it modifies the current set it's applied on
+// with the given t set.
+func (s *Set) Merge(t *Set) {
+	for item := range t.m {
+		s.m[item] = keyExists
+	}
+}
+
+// Separate removes the set items containing in t from set s. Please aware that
+// it's not the opposite of Merge.
+func (s *Set) Separate(t *Set) {
+	s.Remove(t.List()...)
+}
+
+// Union is the merger of multiple sets. It returns a new set with all the
+// elements present in all the sets that are passed.
+func Union(set1, set2 *Set, setItems ...*Set) *Set {
+	u := set1.Copy()
+	for item := range set2.m {
+		u.Add(item)
+	}
+
+	for _, setItem := range setItems {
+		for item := range setItem.m {
+			u.Add(item)
+		}
+	}
+	return u
+}
