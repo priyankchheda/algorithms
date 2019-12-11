@@ -176,3 +176,22 @@ func Union(set1, set2 *Set, setItems ...*Set) *Set {
 	}
 	return u
 }
+
+// Intersection returns a new set which contains items that only exist in all
+// given sets.
+func Intersection(set1, set2 *Set, setItems ...*Set) *Set {
+	all := Union(set1, set2, setItems...)
+	result := Union(set1, set2, setItems...)
+
+	for item := range all.m {
+		if !set1.Has(item) || !set2.Has(item) {
+			result.Remove(item)
+		}
+		for _, setItem := range setItems {
+			if !setItem.Has(item) {
+				result.Remove(item)
+			}
+		}
+	}
+	return result
+}

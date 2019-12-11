@@ -306,3 +306,37 @@ func TestUnion(t *testing.T) {
 		t.Error("merged items are not availabile in union set")
 	}
 }
+
+func TestIntersection(t *testing.T) {
+	s1 := set.NewSet()
+	s1.Add(1, 2, 3, 4, 5)
+	s2 := set.NewSet()
+	s2.Add(4, 2, 6, 5)
+	s3 := set.NewSet()
+	s3.Add(1, 4, 5, 7)
+
+	u := set.Intersection(s1, s2, s3)
+	if u.Size() != 2 {
+		t.Errorf("expected size 2 got %v", u.Size())
+	}
+
+	if !u.Has(4, 5) {
+		t.Error("merged items are not availabile in union set")
+	}
+}
+
+func TestIntersection2(t *testing.T) {
+	s1 := set.NewSet()
+	s1.Add(1, 2, 3, 4, 5)
+	s2 := set.NewSet()
+	s2.Add(6, 7)
+
+	u := set.Intersection(s1, s2)
+	if u.Size() != 0 {
+		t.Errorf("expected size 0 got %v", u.Size())
+	}
+
+	if !u.IsEmpty() {
+		t.Error("union set should be empty")
+	}
+}
