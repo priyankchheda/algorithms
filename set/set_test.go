@@ -307,6 +307,24 @@ func TestUnion(t *testing.T) {
 	}
 }
 
+func TestDifference(t *testing.T) {
+	s1 := set.NewSet()
+	s1.Add(1, 2, 3)
+	s2 := set.NewSet()
+	s2.Add(4, 2, 6)
+	s3 := set.NewSet()
+	s3.Add(1, 5, 7)
+
+	u := set.Difference(s1, s2, s3)
+	if u.Size() != 1 {
+		t.Errorf("expected size 1 got %v", u.Size())
+	}
+
+	if !u.Has(3) {
+		t.Error("merged items are not availabile in union set")
+	}
+}
+
 func TestIntersection(t *testing.T) {
 	s1 := set.NewSet()
 	s1.Add(1, 2, 3, 4, 5)
@@ -338,5 +356,21 @@ func TestIntersection2(t *testing.T) {
 
 	if !u.IsEmpty() {
 		t.Error("union set should be empty")
+	}
+}
+
+func TestSymmetricDifference(t *testing.T) {
+	s1 := set.NewSet()
+	s1.Add(1, 2, 3)
+	s2 := set.NewSet()
+	s2.Add(3, 4, 5)
+
+	u := set.SymmetricDifference(s1, s2)
+	if u.Size() != 4 {
+		t.Errorf("expected size 2 got %v", u.Size())
+	}
+
+	if !u.Has(1, 2, 4, 5) {
+		t.Error("merged items are not availabile in union set")
 	}
 }

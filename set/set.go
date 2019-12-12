@@ -177,6 +177,18 @@ func Union(set1, set2 *Set, setItems ...*Set) *Set {
 	return u
 }
 
+// Difference returns a new set which contains items which are in in the first
+// set but not in the others. Unlike the Separate() method you can use this
+// function separately with multiple sets.
+func Difference(set1, set2 *Set, sets ...*Set) *Set {
+	s := set1.Copy()
+	s.Separate(set2)
+	for _, set := range sets {
+		s.Separate(set)
+	}
+	return s
+}
+
 // Intersection returns a new set which contains items that only exist in all
 // given sets.
 func Intersection(set1, set2 *Set, setItems ...*Set) *Set {
@@ -194,4 +206,12 @@ func Intersection(set1, set2 *Set, setItems ...*Set) *Set {
 		}
 	}
 	return result
+}
+
+// SymmetricDifference returns a new set which s is the difference of items
+// which are in one of either, but not in both.
+func SymmetricDifference(s *Set, t *Set) *Set {
+	u := Difference(s, t)
+	v := Difference(t, s)
+	return Union(u, v)
 }
