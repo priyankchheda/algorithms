@@ -35,7 +35,7 @@ func TestAddSingle(t *testing.T) {
 	s.Add(2) // duplicate entry
 
 	if actualSize := s.Size(); actualSize != 3 {
-		t.Errorf("wrong answer expected: 5, got:%v", actualSize)
+		t.Errorf("wrong answer expected: 3, got:%v", actualSize)
 	}
 
 	if !s.Has(1, 2, 3) {
@@ -48,7 +48,7 @@ func TestAddMultiple(t *testing.T) {
 	s.Add(12, 23, 35, 47)
 
 	if actualSize := s.Size(); actualSize != 4 {
-		t.Errorf("wrong answer expected: 5, got:%v", actualSize)
+		t.Errorf("wrong answer expected: 4, got:%v", actualSize)
 	}
 
 	if !s.Has(12, 23, 35, 47) {
@@ -367,7 +367,7 @@ func TestSymmetricDifference(t *testing.T) {
 
 	u := set.SymmetricDifference(s1, s2)
 	if u.Size() != 4 {
-		t.Errorf("expected size 2 got %v", u.Size())
+		t.Errorf("expected size 4 got %v", u.Size())
 	}
 
 	if !u.Has(1, 2, 4, 5) {
