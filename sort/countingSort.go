@@ -1,37 +1,19 @@
-package main
+package sort
 
-import "fmt"
-
-//use this for strings
-func countingSortString(data []rune, size int) string {
-	length := 256
-	count := make([]int, length)
-	output := make([]rune, size)
-	for i := 0; i < size; i++ {
-		count[data[i]]++
-	}
-
-	for i := 1; i < length; i++ {
-		count[i] += count[i-1]
-	}
-
-	for i := 0; i < size; i++ {
-		output[count[data[i]]-1] = data[i]
-		count[data[i]]--
-	}
-
-	return string(output)
-}
-
-func countingSortNumber(data []int, size int) []int {
+/*
+Counting sort is a sorting algorithm that sorts the elements of an array
+by counting the number of occurrences of each unique element in the array.
+The count is stored in an auxiliary array
+and the sorting is done by mapping the count as an index of the auxiliary array.
+*/
+func CountingSort(data []int) {
+	size := len(data)
 	min := data[0]
+	max := data[0]
 	for _, val := range data {
 		if val < min {
 			min = val
 		}
-	}
-	max := data[0]
-	for _, val := range data {
 		if val > max {
 			max = val
 		}
@@ -53,16 +35,5 @@ func countingSortNumber(data []int, size int) []int {
 		count[data[i]-min]--
 	}
 
-	return output
-
-}
-
-func main() {
-	data := "golang"
-	g := []rune(data)
-	str := countingSortString(g, len(data))
-	fmt.Println(str)
-
-	arr := []int{0, -2, -9, 20, 7}
-	fmt.Println(countingSortNumber(arr, len(arr)))
+	data = output
 }

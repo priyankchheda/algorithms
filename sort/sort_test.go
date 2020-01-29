@@ -62,6 +62,11 @@ func TestInsertionSort(t *testing.T) {
 	testSortRandom(t, mysort.InsertionSort)
 }
 
+func TestCountingSort(t *testing.T) {
+	testSort(t, mysort.CountingSort)
+	testSortRandom(t, mysort.CountingSort)
+}
+
 func TestBubbleSort(t *testing.T) {
 	testSort(t, mysort.BubbleSort)
 	testSortRandom(t, mysort.BubbleSort)
