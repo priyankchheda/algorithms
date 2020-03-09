@@ -25,6 +25,7 @@ public:
     /* Deletion Method */
     int deleteHead();
     int deleteEnd();
+    int deleteAt(int position);
 
     /* Misc Method */
     void printLinkedList();

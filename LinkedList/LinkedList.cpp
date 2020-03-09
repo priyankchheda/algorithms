@@ -82,6 +82,30 @@ int LinkedList::deleteEnd() {
         previous->next = nullptr;
     }
     int removedData = current->data;
+    delete current;
+    return removedData;
+}
+
+int LinkedList::deleteAt(int position) {
+    int ll_length = getLength();
+    if (position < 1 || position > ll_length)
+        return -1;
+
+    if (position == 1)
+        return deleteHead();
+    else if (position == ll_length)
+        return deleteEnd();
+    else {
+        Node* previous = head;
+        Node* current = head;
+        for (int i = 1; i < position; i++) {
+            previous = current;
+            current = current->next;
+        }
+        int removedData = current->data;
+        previous->next = current->next;
+        current->next = nullptr;
         delete current;
         return removedData;
+    }
 }

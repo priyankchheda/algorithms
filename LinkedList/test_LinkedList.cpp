@@ -151,7 +151,7 @@ TEST_F(LinkedListDataInit, DeleteHeadTest) {
 
     for (int i = 1; i < 6; i++)
         ASSERT_EQ(i, ll.deleteHead());
-    
+
     // after removing every node from linked list, head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
 }
@@ -159,6 +159,13 @@ TEST_F(LinkedListDataInit, DeleteHeadTest) {
 // test deleteEnd method on empty linked list
 TEST(LinkedListEmptyInit, DeleteEndTest) {
     LinkedList ll;
+
+    ll.insertHead(5);
+    ASSERT_EQ(5, ll.deleteEnd());
+
+    ll.insertHead(9);
+    ASSERT_EQ(9, ll.deleteEnd());
+
     for (int i = 0; i < 5; i++)
         ASSERT_EQ(-1, ll.deleteEnd());
 
@@ -175,5 +182,24 @@ TEST_F(LinkedListDataInit, DeleteEndTest) {
         ASSERT_EQ(i, ll.deleteEnd());
 
     // after removing every node from linked list, head should point to nullptr
+    ASSERT_EQ(nullptr, ll.getHead());
+}
+
+TEST(LinkedListEmptyInit, DeleteAtTest) {
+    LinkedList ll;
+    ASSERT_EQ(-1, ll.deleteAt(3));
+    ASSERT_EQ(-1, ll.deleteAt(0));
+    ASSERT_EQ(-1, ll.deleteAt(-5));
+}
+
+TEST_F(LinkedListDataInit, DeleteAtTest) {
+    ASSERT_EQ(3, ll.deleteAt(3));
+    ASSERT_EQ(4, ll.deleteAt(3));
+    ASSERT_EQ(-1, ll.deleteAt(0));
+    ASSERT_EQ(-1, ll.deleteAt(5));
+    ASSERT_EQ(-1, ll.deleteAt(4));
+    ASSERT_EQ(5, ll.deleteAt(3));
+    ASSERT_EQ(1, ll.deleteAt(1));
+    ASSERT_EQ(2, ll.deleteAt(1));
     ASSERT_EQ(nullptr, ll.getHead());
 }
