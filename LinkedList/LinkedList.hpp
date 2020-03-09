@@ -11,13 +11,22 @@ struct Node {
 class LinkedList {
 private:
     Node* head;
+
 public:
     LinkedList() { head = nullptr; }
     Node* getHead() { return head; }
+    int getLength();
+
+    /* Insertion Method */
     void insertHead(int data);
     void insertEnd(int data);
     void insertAt(int data, int position);
-    int getLength();
+
+    /* Deletion Method */
+    int deleteHead();
+    int deleteEnd();
+
+    /* Misc Method */
     void printLinkedList();
 };
 

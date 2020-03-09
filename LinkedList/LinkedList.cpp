@@ -59,3 +59,29 @@ void LinkedList::printLinkedList() {
     }
     std::cout << std::endl;
 }
+
+int LinkedList::deleteHead() {
+    if (head == nullptr) return -1;
+    Node* temp = head;
+    int removedData = temp->data;
+    head = head->next;
+    delete temp;
+    return removedData;
+}
+
+int LinkedList::deleteEnd() {
+    if (head == nullptr) return -1;
+    Node* current = head;
+    if (head->next == nullptr) head = nullptr;
+    else {
+        Node* previous = head;
+        while (current->next != nullptr) {
+            previous = current;
+            current = current->next;
+        }
+        previous->next = nullptr;
+    }
+    int removedData = current->data;
+        delete current;
+        return removedData;
+}
