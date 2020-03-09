@@ -52,3 +52,6 @@ Mkfile.old
 dkms.conf
 
 .idea
+
+# google test source code
+googletest
