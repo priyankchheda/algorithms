@@ -4,6 +4,7 @@
 #include "LinkedList.hpp"
 
 /* Fixtures */
+// LinkedList containing only multiple node
 class LinkedListDataInit : public testing::Test {
 protected:
     LinkedList ll;
@@ -13,6 +14,15 @@ protected:
         ll.insertEnd(3);
         ll.insertEnd(4);
         ll.insertEnd(5);
+    }
+};
+
+// LinkedList containing only one node
+class LinkedListSingleInit : public testing::Test {
+protected:
+    LinkedList ll;
+    void SetUp() override {
+        ll.insertHead(5);
     }
 };
 
@@ -35,6 +45,8 @@ std::vector<int> convertLinkedListToVector(Node* head) {
     }
     return result;
 }
+
+/* Linked List Insertion */
 
 // test insertHead method on empty linked list
 TEST(LinkedListEmptyInit, InsertHeadTest) {
@@ -66,6 +78,7 @@ TEST(LinkedListEmptyInit, InsertEndTest) {
     ASSERT_EQ(1, ll.getHead()->data);
     ll.insertEnd(2);
     ASSERT_EQ(1, ll.getHead()->data);
+    ASSERT_EQ(2, getTailData(ll.getHead()));
     ll.insertEnd(3);
     ASSERT_EQ(3, getTailData(ll.getHead()));
     ll.insertEnd(4);
@@ -112,6 +125,8 @@ TEST_F(LinkedListDataInit, InsertAtTest) {
         ASSERT_EQ(expectedOutput[i], ll_vector[i]);
 }
 
+/* Linked List GetLength */
+
 // test getLength method on empty linked list
 TEST(LinkedListEmptyInit, GetLengthTest) {
     LinkedList ll;
@@ -135,6 +150,8 @@ TEST_F(LinkedListDataInit, GetLengthTest) {
     ASSERT_EQ(6, ll.getLength());
 }
 
+/* Linked List Deletion */
+
 // test deleteHead method on empty linked list
 TEST(LinkedListEmptyInit, DeleteHeadTest) {
     LinkedList ll;
@@ -142,6 +159,16 @@ TEST(LinkedListEmptyInit, DeleteHeadTest) {
 
     // after removing every node from linked list, head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
+}
+
+// test deleteHead method on single linked list
+TEST_F(LinkedListSingleInit, DeleteHeadTest) {
+    ASSERT_EQ(5, ll.deleteHead());
+    ASSERT_EQ(-1, ll.deleteHead());
+    // after removing every node from linked list, head should point to nullptr
+    ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
 }
 
 // test deleteHead method on filled linked list
@@ -154,6 +181,7 @@ TEST_F(LinkedListDataInit, DeleteHeadTest) {
 
     // after removing every node from linked list, head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
 }
 
 // test deleteEnd method on empty linked list
@@ -171,6 +199,16 @@ TEST(LinkedListEmptyInit, DeleteEndTest) {
 
     // after removing every node from linked list, head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
+}
+
+// test deleteEnd method on single linked list
+TEST_F(LinkedListSingleInit, DeleteEndTest) {
+    ASSERT_EQ(5, ll.deleteEnd());
+    ASSERT_EQ(-1, ll.deleteEnd());
+    // after removing every node from linked list, head should point to nullptr
+    ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
 }
 
 // test deleteEnd method on filled linked list
@@ -183,15 +221,34 @@ TEST_F(LinkedListDataInit, DeleteEndTest) {
 
     // after removing every node from linked list, head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
 }
 
+// test deleteAt method on empty linked list
 TEST(LinkedListEmptyInit, DeleteAtTest) {
     LinkedList ll;
     ASSERT_EQ(-1, ll.deleteAt(3));
     ASSERT_EQ(-1, ll.deleteAt(0));
     ASSERT_EQ(-1, ll.deleteAt(-5));
+
+    // after removing every node from linked list, head should point to nullptr
+    ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
 }
 
+// test deleteAt method on single linked list
+TEST_F(LinkedListSingleInit, DeleteAtTest) {
+    ASSERT_EQ(-1, ll.deleteAt(2));
+    ASSERT_EQ(-1, ll.deleteAt(-1));
+    ASSERT_EQ(-1, ll.deleteAt(0));
+    ASSERT_EQ(5, ll.deleteAt(1));
+    ASSERT_EQ(-1, ll.deleteAt(1));
+    // after removing every node from linked list, head should point to nullptr
+    ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
+}
+
+// test deleteAt method on filled linked list
 TEST_F(LinkedListDataInit, DeleteAtTest) {
     ASSERT_EQ(3, ll.deleteAt(3));
     ASSERT_EQ(4, ll.deleteAt(3));
@@ -201,5 +258,89 @@ TEST_F(LinkedListDataInit, DeleteAtTest) {
     ASSERT_EQ(5, ll.deleteAt(3));
     ASSERT_EQ(1, ll.deleteAt(1));
     ASSERT_EQ(2, ll.deleteAt(1));
+
+    // after removing every node from linked list, head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
+}
+
+// test dataAt method on empty linked list
+TEST(LinkedListEmptyInit, DataAtTest) {
+    LinkedList ll;
+    ASSERT_EQ(-1, ll.dataAt(0));
+    ASSERT_EQ(-1, ll.dataAt(-1));
+    ASSERT_EQ(-1, ll.dataAt(1));
+}
+
+// test dataAt method on empty linked list
+TEST_F(LinkedListSingleInit, DataAtTest) {
+    ASSERT_EQ(-1, ll.dataAt(-2));
+    ASSERT_EQ(-1, ll.dataAt(0));
+    ASSERT_EQ(5, ll.dataAt(1));
+    ASSERT_EQ(-1, ll.dataAt(2));
+    ASSERT_EQ(1, ll.getLength());
+}
+
+// test dataAt method on empty linked list
+TEST_F(LinkedListDataInit, DataAtTest) {
+    for (int i = 1; i < 6; i++)
+        ASSERT_EQ(i, ll.dataAt(i));
+    ASSERT_EQ(-1, ll.dataAt(0));
+    ASSERT_EQ(-1, ll.dataAt(-1));
+}
+
+/* Reverse Test */
+
+// test reverse method on empty linked list
+TEST(LinkedListEmptyInit, ReverseTest) {
+    LinkedList ll;
+    ll.Reverse();
+
+    // after removing every node from linked list,
+    // head should point to nullptr
+    ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
+}
+
+// test reverse method on single node linked list
+TEST_F(LinkedListSingleInit, ReverseTest) {
+    ll.Reverse();
+    ASSERT_EQ(1, ll.getLength());
+    ASSERT_EQ(5, ll.dataAt(1));
+}
+
+// test reverse method on multiple node linked list
+TEST_F(LinkedListDataInit, ReverseTest) {
+    ll.Reverse();
+    std::vector<int> ll_vector = convertLinkedListToVector(ll.getHead());
+    for (int i = 0; i < 5; i++)
+        ASSERT_EQ(ll_vector[i], 5-i);
+}
+
+
+
+// test reverse method (recursive) on empty linked list
+TEST(LinkedListEmptyInit, ReverseRecursiveTest) {
+    LinkedList ll;
+    ll.ReverseRecursive(ll.getHead());
+
+    // after removing every node from linked list,
+    // head should point to nullptr
+    ASSERT_EQ(nullptr, ll.getHead());
+    ASSERT_EQ(0, ll.getLength());
+}
+
+// test reverse method (recursive) on single node linked list
+TEST_F(LinkedListSingleInit, ReverseRecursiveTest) {
+    ll.ReverseRecursive(ll.getHead());
+    ASSERT_EQ(1, ll.getLength());
+    ASSERT_EQ(5, ll.dataAt(1));
+}
+
+// test reverse method (recursive) on multiple node linked list
+TEST_F(LinkedListDataInit, ReverseRecursiveTest) {
+    ll.ReverseRecursive(ll.getHead());
+    std::vector<int> ll_vector = convertLinkedListToVector(ll.getHead());
+    for (int i = 0; i < 5; i++)
+        ASSERT_EQ(ll_vector[i], 5-i);
 }

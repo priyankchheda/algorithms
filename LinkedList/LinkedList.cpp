@@ -51,15 +51,6 @@ void LinkedList::insertAt(int data, int position) {
     }
 }
 
-void LinkedList::printLinkedList() {
-    Node* temp = head;
-    while (temp) {
-        std::cout << " -> " << temp->data;
-        temp = temp->next;
-    }
-    std::cout << std::endl;
-}
-
 int LinkedList::deleteHead() {
     if (head == nullptr) return -1;
     Node* temp = head;
@@ -108,4 +99,64 @@ int LinkedList::deleteAt(int position) {
         delete current;
         return removedData;
     }
+}
+
+int LinkedList::dataAt(int position) {
+    int ll_length = getLength();
+    if (position < 1 || position > ll_length)
+        return -1;
+
+    Node* current = head;
+    for (int i = 1; i < position; i++)
+        current = current->next;
+
+    return current->data;
+}
+
+void LinkedList::Reverse() {
+    Node* previous = nullptr;
+    Node* following = nullptr;
+    Node* current = head;
+
+    while (current != nullptr) {
+        following = current->next;
+        current->next = previous;
+        previous = current;
+        current = following;
+    }
+    head = previous;
+}
+
+void LinkedList::ReverseRecursive(Node* node) {
+    if (node == nullptr)
+        return;
+    if (node->next == nullptr) {
+        head = node;
+        return;
+    }
+    ReverseRecursive(node->next);
+    Node* prev = node->next;
+    prev->next = node;
+    node->next = nullptr;
+}
+
+void LinkedList::printList() {
+    Node* temp = head;
+    while (temp) {
+        std::cout << " -> " << temp->data;
+        temp = temp->next;
+    }
+    std::cout << std::endl;
+}
+
+void LinkedList::printListRecursive(Node* node) {
+    if (node == nullptr) return;
+    std::cout << " -> " << node->data;
+    printListRecursive(node->next);
+}
+
+void LinkedList::printReverseListRecursive(Node* node) {
+    if (node == nullptr) return;
+    printReverseListRecursive(node->next);
+    std::cout << " -> " << node->data;
 }

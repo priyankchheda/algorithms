@@ -27,8 +27,17 @@ public:
     int deleteEnd();
     int deleteAt(int position);
 
-    /* Misc Method */
-    void printLinkedList();
+    /* Data */
+    int dataAt(int position);
+
+    /* Recursive Method */
+    void Reverse();
+    void ReverseRecursive(Node* node);
+
+    /* Print Method */
+    void printList();
+    void printListRecursive(Node* node);
+    void printReverseListRecursive(Node* node);
 };
 
 #endif
