@@ -11,6 +11,11 @@ int LinkedList::getLength() {
     return count;
 }
 
+int LinkedList::getLengthRecursive(Node* node) {
+    if (node == nullptr) return 0;
+    return 1 + getLengthRecursive(node->next);
+}
+
 void LinkedList::insertHead(int data) {
     Node* temp = new Node(data);
     temp->next = head;
@@ -101,6 +106,21 @@ int LinkedList::deleteAt(int position) {
     }
 }
 
+int LinkedList::deleteKey(int key) {
+    return deleteAt(indexOf(key));
+}
+
+void LinkedList::deleteList() {
+    Node* current = head;
+    Node* next = nullptr;
+    while (current != nullptr) {
+        next = current->next;
+        delete current;
+        current = next;
+    }
+    head = nullptr;
+}
+
 int LinkedList::dataAt(int position) {
     int ll_length = getLength();
     if (position < 1 || position > ll_length)
@@ -111,6 +131,18 @@ int LinkedList::dataAt(int position) {
         current = current->next;
 
     return current->data;
+}
+
+int LinkedList::indexOf(int key) {
+    Node* node = head;
+    int count = 1;
+    while (node != nullptr) {
+        if (node->data == key)
+            return count;
+        node = node->next;
+        count++;
+    }
+    return -1;
 }
 
 void LinkedList::Reverse() {
