@@ -1,6 +1,6 @@
 CC=g++
-GTEST_INCLUDE_PATH=../googletest/googletest/include/
-GTEST_LIBRARY_PATH=../googletest/build/lib/ -lgtest -lgtest_main
+GTEST_INCLUDE_PATH=../../googletest/googletest/include/
+GTEST_LIBRARY_PATH=../../googletest/build/lib/ -lgtest -lgtest_main
 CCFLAGS=-Wall -std=c++14
 
 all: LinkedList.o
