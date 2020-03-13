@@ -6,6 +6,7 @@
  *      A -> B -> C -> D -> NULL
  *
  * URL: https://www.geeksforgeeks.org/nth-node-from-the-end-of-a-linked-list/
+ * cmd: g++ getNthNodeFromEnd.cpp LinkedList/LinkedList.cpp -Wall -std=c++14
 */
 
 #include <iostream>
@@ -14,7 +15,8 @@
 int getNthFromEnd_UsingLengthMethod(LinkedList* ll, int position);
 int getNthFromEnd_UsingTwoPointerMethod(LinkedList* ll, int position);
 
-int main() {
+int main()
+{
     LinkedList ll;
     ll.insertEnd(20);
     ll.insertEnd(4);
@@ -41,7 +43,7 @@ int main() {
 }
 
 /**
- * calculates the length of linked list and then print (length - position)th
+ * Calculate the length of linked list and then print (length - position)th
  * node from the beginning of the linked list.
  * Returns -1 if position is greater than linked list current length or
  * less than zero.
@@ -51,7 +53,8 @@ int main() {
  * @param position position from end. Position is 1-based.
  * @return nth node's value from end.
 */
-int getNthFromEnd_UsingLengthMethod(LinkedList* ll, int position) {
+int getNthFromEnd_UsingLengthMethod(LinkedList* ll, int position)
+{
     int length = ll->getLength();
     if (position >= length + 1 || position <= 0)
         return -1;
@@ -76,7 +79,8 @@ int getNthFromEnd_UsingLengthMethod(LinkedList* ll, int position) {
  * @param position position from end. Position is 1-based.
  * @return nth node's value from end.
 */
-int getNthFromEnd_UsingTwoPointerMethod(LinkedList* ll, int position) {
+int getNthFromEnd_UsingTwoPointerMethod(LinkedList* ll, int position)
+{
     int length = ll->getLength();
     Node* head = ll->getHead();
     if (position >= length + 1 || position <= 0)
