@@ -9,49 +9,52 @@
 Queue::Queue(int cap) {
     items = new int[cap];
     capacity = cap;
-    front = -1;
+    front = 0;
     rear = -1;
+    item_count = 0;
 }
 
 Queue::~Queue() {
     delete items;
 }
 
+int Queue::size() {
+    return item_count;
+}
+
 bool Queue::isFull() {
-    int nextRear = rear % capacity;
-    return nextRear = front;
+    return size() == capacity;
 }
 
 bool Queue::isEmpty() {
-    return rear == -1 && front == -1;
+    return size() == 0;
 }
 
 int Queue::enqueue(int element) {
-    if (isEmpty()) {
-        front = 0;
-        rear = 0;
-        items[rear] = element;
-    } else if (isFull()) {
+    if (isFull()) {
         return QUEUE_FULL;
-    } else {
-        rear = (rear + 1) % capacity;
-        items[rear] = element;
     }
+    rear = (rear + 1) % capacity;
+    items[rear] = element;
+    item_count++;
     return 0;
 }
 
 int Queue::dequeue() {
-    if (isFull()) {
+    if (isEmpty()) {
         return QUEUE_EMPTY;
     }
-    int removedValue = items[front];
-    if (front == rear) {
-        front = -1;
-        rear = -1;
-    } else {
-        front = (front + 1) % capacity;
+    int removedvalue = items[front];
+    front = (front + 1) % capacity;
+    item_count--;
+    return removedvalue;
+}
+
+int Queue::peek() {
+    if (isEmpty()) {
+        return QUEUE_EMPTY;
     }
-    return removedValue;
+    return items[front];
 }
 
 void Queue::display() {

@@ -22,6 +22,7 @@ private:
     int front;
     int rear;
     int capacity;
+    int item_count;
 
 public:
     Queue(int cap = DEFAULT_CAPACITY);
@@ -29,6 +30,7 @@ public:
 
     int enqueue(int item);
     int dequeue();
+    int peek();
 
     int size();
     bool isEmpty();
