@@ -6,7 +6,7 @@
  * Create new stack items array in heap memory
  * @param cap maximum capacity of Stack
 */
-Stack::Stack(int cap) {
+Stack::Stack::Stack(int cap) {
     items = new int[cap];
     capacity = cap;
     top = -1;
@@ -16,7 +16,7 @@ Stack::Stack(int cap) {
  * Destructor
  * delete stack items array from heap memory
 */
-Stack::~Stack() {
+Stack::Stack::~Stack() {
     delete items;
 }
 
@@ -24,7 +24,7 @@ Stack::~Stack() {
  * Get current size of stack
  * @return total number of items currently present in stack
 */
-int Stack::size() {
+int Stack::Stack::size() {
     return top + 1;
 }
 
@@ -32,7 +32,7 @@ int Stack::size() {
  * Checks if the stack is empty
  * @return true if stack is empty, else false
 */
-bool Stack::isEmpty() {
+bool Stack::Stack::isEmpty() {
     return top == -1;
 }
 
@@ -40,7 +40,7 @@ bool Stack::isEmpty() {
  * Checks if the stack is full
  * @return true if stack is full, else false
 */
-bool Stack::isFull() {
+bool Stack::Stack::isFull() {
     return (top + 1) == capacity;
 }
 
@@ -48,11 +48,12 @@ bool Stack::isFull() {
  * insert(push) an integer element to stack.
  * @param item to be inserted in stack
  * @return status code 0, if operation is successful.
- *      -1, if stack is full (item not inserted).
+ * @throws Stack::Exception::Overflow exception if stack is full
+ *      (item not inserted).
 */
-int Stack::push(int item) {
+int Stack::Stack::push(int item) {
     if (isFull())
-        return STACK_FULL;
+        throw OverflowException();
     items[++top] = item;
     return 0;
 }
@@ -60,11 +61,11 @@ int Stack::push(int item) {
 /**
  * remove(pop) an integer element from stack.
  * @return popped value if operation is successful.
- *      -2, if stack is empty (nothing to pop).
+ * @throws UnderflowException exception if stack is empty (nothing to pop).
 */
-int Stack::pop() {
-    if (isEmpty())
-        return STACK_EMPTY;
+int Stack::Stack::pop() {
+    if (Stack::isEmpty())
+        throw UnderflowException();
     int poppedValue = items[top--];
     return poppedValue;
 }
@@ -72,10 +73,11 @@ int Stack::pop() {
 /**
  * Peek top element in stack without removing it.
  * @return top item without removing it.
+ * @throws UnderflowException exception if stack is empty (nothing to peek).
 */
-int Stack::peek() {
-    if (isEmpty())
-        return STACK_EMPTY;
+int Stack::Stack::peek() {
+    if (Stack::isEmpty())
+        throw UnderflowException();
     int peakValue = items[top];
     return peakValue;
 }
@@ -83,9 +85,9 @@ int Stack::peek() {
 /**
  * Display all elements in the stack
 */
-void Stack::display() {
+void Stack::Stack::display() {
     std::cout << "Stack: ";
-    if (isEmpty())
+    if (Stack::isEmpty())
         std::cout << "Empty\n";
     else {
         for (int i = 0; i <= top ; i++)

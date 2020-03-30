@@ -8,28 +8,43 @@
 #define STACK_H
 
 #define DEFAULT_CAPACITY 10
-#define STACK_FULL -1
-#define STACK_EMPTY -2
 
-class Stack {
-private:
-    int* items;
-    int top;
-    int capacity;
+/* StackOverflow Exception is raised when stack is overflow */
+namespace Stack {
 
-public:
-    Stack(int cap = DEFAULT_CAPACITY);
-    ~Stack();
+    class OverflowException : public std::exception {
+        const char* what() const throw() {
+            return "stack overflow exception";
+        }
+    };
 
-    int push(int item);
-    int pop();
-    int peek();
+    /* StackUnderflow Exception is raised when stack is underflow */
+    class UnderflowException : public std::exception {
+        const char* what() const throw() {
+            return "stack underflow exception";
+        }
+    };
 
-    int size();
-    bool isEmpty();
-    bool isFull();
 
-    void display();
-};
+    class Stack {
+    private:
+        int* items;
+        int top;
+        int capacity;
 
+    public:
+        Stack(int cap = DEFAULT_CAPACITY);
+        ~Stack();
+
+        int push(int item);
+        int pop();
+        int peek();
+
+        int size();
+        bool isEmpty();
+        bool isFull();
+
+        void display();
+    };
+}
 #endif
