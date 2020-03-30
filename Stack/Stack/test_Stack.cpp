@@ -5,7 +5,7 @@
 // generating completely full stack
 class StackTest : public testing::Test {
 protected:
-	Stack::Stack stack;
+	Stack::Stack<int> stack;
 	StackTest(): stack(5) {}
 	void SetUp() override {
 		for (int i = 1; i < 6; i++)
@@ -15,7 +15,7 @@ protected:
 
 // test stack.isEmpty method
 TEST(StackEmptyTest, isEmptyTest) {
-    Stack::Stack stack(5);
+    Stack::Stack<int> stack(5);
     ASSERT_TRUE(stack.isEmpty());
     ASSERT_EQ(0, stack.push(7));
     ASSERT_FALSE(stack.isEmpty());
@@ -25,7 +25,7 @@ TEST(StackEmptyTest, isEmptyTest) {
 
 // test stack.push method
 TEST(StackEmptyTest, PushTest) {
-    Stack::Stack stack(5);
+    Stack::Stack<int> stack(5);
     for (int i = 1; i < 6; i++)
         ASSERT_EQ(0, stack.push(i));
     ASSERT_THROW(stack.push(6), Stack::OverflowException);
