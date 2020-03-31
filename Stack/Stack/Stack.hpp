@@ -60,7 +60,7 @@ namespace Stack {
     */
     template <typename T>
     Stack<T>::Stack(int cap) {
-        items = new int[cap];
+        items = new T[cap];
         capacity = cap;
         top = -1;
     }
