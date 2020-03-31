@@ -5,7 +5,7 @@
 // generating completely full queue
 class QueueTest : public testing::Test {
 protected:
-	Queue queue;
+	Queue::Queue<int> queue;
 	QueueTest(): queue(5) {}
 	void SetUp() override {
 		for (int i = 1; i < 6; i++)
@@ -15,20 +15,20 @@ protected:
 
 // test queue.enqueue method
 TEST(QueueEmptyTest, EnqueueTest) {
-    Queue queue(5);
+    Queue::Queue<int> queue(5);
     for (int i = 1; i < 6; i++)
         ASSERT_EQ(0, queue.enqueue(i));
-    ASSERT_EQ(-1, queue.enqueue(6));
+    ASSERT_THROW(queue.enqueue(6), Queue::OverflowException);
     ASSERT_EQ(1, queue.dequeue());
     ASSERT_EQ(0, queue.enqueue(7));
     ASSERT_EQ(2, queue.dequeue());
     ASSERT_EQ(0, queue.enqueue(8));
-    ASSERT_EQ(-1, queue.enqueue(9));
+    ASSERT_THROW(queue.enqueue(9), Queue::OverflowException);
 }
 
 // test queue.isEmpty method
 TEST(QueueEmptyTest, isEmptyTest) {
-    Queue queue(5);
+    Queue::Queue<int> queue(5);
     ASSERT_TRUE(queue.isEmpty());
     ASSERT_EQ(0, queue.enqueue(1));
     ASSERT_FALSE(queue.isEmpty());
@@ -41,10 +41,10 @@ TEST_F(QueueTest, DequeueTest) {
     for (int i = 1; i < 6; i++) {
         ASSERT_EQ(i, queue.dequeue());
     }
-    ASSERT_EQ(-2, queue.dequeue());
+    ASSERT_THROW(queue.dequeue(), Queue::UnderflowException);
     ASSERT_EQ(0, queue.enqueue(67));
     ASSERT_EQ(67, queue.dequeue());
-    ASSERT_EQ(-2, queue.dequeue());
+    ASSERT_THROW(queue.dequeue(), Queue::UnderflowException);
 
 }
 
@@ -56,7 +56,7 @@ TEST_F(QueueTest, PeekTest) {
         ASSERT_EQ(i, queue.peek());
         ASSERT_EQ(i, queue.dequeue());
     }
-    ASSERT_EQ(-2, queue.peek());
+    ASSERT_THROW(queue.peek(), Queue::UnderflowException);
 }
 
 // test queue.isFull method
@@ -71,7 +71,7 @@ TEST_F(QueueTest, isFullTest) {
 // test queue.size method
 TEST_F(QueueTest, sizeTest) {
     ASSERT_EQ(5, queue.size());
-    queue.enqueue(6);
+    ASSERT_THROW(queue.enqueue(6), Queue::OverflowException);
     ASSERT_EQ(5, queue.size());
     queue.dequeue();
     queue.dequeue();

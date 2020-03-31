@@ -11,14 +11,20 @@
 
 namespace Stack {
 
-    /* StackOverflow Exception is raised when stack is overflow */
+    /**
+     * OverflowException is raised when you are trying to insert
+     * element in completely filled stack.
+     */
     class OverflowException : public std::exception {
         const char* what() const throw() {
             return "stack overflow exception";
         }
     };
 
-    /* StackUnderflow Exception is raised when stack is underflow */
+    /**
+     * UnderflowException is raised when you are trying to access
+     * element from empty stack.
+     */
     class UnderflowException : public std::exception {
         const char* what() const throw() {
             return "stack underflow exception";
@@ -69,7 +75,7 @@ namespace Stack {
     }
 
     /**
-     * insert(push) an integer element to stack.
+     * insert(push) an element to stack.
      * @param item to be inserted in stack
      * @return status code 0, if operation is successful.
      * @throws Stack::OverflowException if stack is full
