@@ -25,23 +25,34 @@ int main()
 */
 bool areParanthesisBalanced(std::string exp)
 {
-    Stack::Stack<char> stack;
+    Stack::Stack<char> stack(10);
     int expLen = exp.length();
 
     for (int i = 0; i < expLen; i++) {
         // if character is any of the opening braces, push it to stack
         if (exp[i] == '(' || exp[i] == '{' || exp[i] == '[') {
-            stack.push(exp[i]);
+            try {
+                stack.push(exp[i]);
+            } catch (Stack::OverflowException &e) {
+                std::cout << "Stack Overflow Exception.\n";
+                std::cout << "Can't do anything. Rerun with more stack space\n";
+                throw;
+            }
 
         // if character is any of the closing braces and peek of stack is
         // corresponding opening braces, pop the opening brace from stack
         // ignore every other character
         } else if (exp[i] == ')' || exp[i] == '}' || exp[i] == ']') {
-            if ((exp[i] == ')' && stack.peek() == '(') ||
-                (exp[i] == '}' && stack.peek() == '{') ||
-                (exp[i] == ']' && stack.peek() == '['))
-                stack.pop();
-            else return false;
+            try {
+                if ((exp[i] == ')' && stack.peek() == '(') ||
+                    (exp[i] == '}' && stack.peek() == '{') ||
+                    (exp[i] == ']' && stack.peek() == '['))
+                    stack.pop();
+                else return false;
+            } catch (Stack::UnderflowException &e) {
+                std::cout << "underflow exception thrown\n";
+                return false;
+            }
         }
     }
 
