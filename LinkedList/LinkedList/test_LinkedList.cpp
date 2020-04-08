@@ -7,7 +7,7 @@
 // LinkedList containing only multiple node
 class LinkedListDataInit : public testing::Test {
 protected:
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     void SetUp() override {
         ll.insertEnd(1);
         ll.insertEnd(2);
@@ -20,7 +20,7 @@ protected:
 // LinkedList containing only one node
 class LinkedListSingleInit : public testing::Test {
 protected:
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     void SetUp() override {
         ll.insertHead(5);
     }
@@ -28,7 +28,7 @@ protected:
 
 /* Helper Functions */
 // get tail node data
-int getTailData(Node<int>* node) {
+int getTailData(LinkedList::Node<int>* node) {
     while (node->next != nullptr) {
         node = node->next;
     }
@@ -36,9 +36,9 @@ int getTailData(Node<int>* node) {
 }
 
 // convert linked list data to vector representation
-std::vector<int> convertLinkedListToVector(Node<int>* head) {
+std::vector<int> convertLinkedListToVector(LinkedList::Node<int>* head) {
     std::vector<int> result;
-    Node<int>* temp = head;
+    LinkedList::Node<int>* temp = head;
     while(temp) {
         result.push_back(temp->data);
         temp = temp->next;
@@ -50,7 +50,7 @@ std::vector<int> convertLinkedListToVector(Node<int>* head) {
 
 // test insertHead method on empty linked list
 TEST(LinkedListEmptyInit, InsertHeadTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ll.insertHead(1);
     ASSERT_EQ(1, ll.getHead()->data);
     ll.insertHead(2);
@@ -73,7 +73,7 @@ TEST_F(LinkedListDataInit, InsertHeadTest) {
 
 // test insertEnd method on empty linked list
 TEST(LinkedListEmptyInit, InsertEndTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ll.insertEnd(1);
     ASSERT_EQ(1, ll.getHead()->data);
     ll.insertEnd(2);
@@ -99,7 +99,7 @@ TEST_F(LinkedListDataInit, InsertEndTest) {
 
 // test insertAt method on empty linked list
 TEST(LinkedListEmptyInit, InsertAtTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ll.insertAt(4, 3);
     ll.insertAt(2, 1);
     ll.insertAt(5, 3);
@@ -129,7 +129,7 @@ TEST_F(LinkedListDataInit, InsertAtTest) {
 
 // test getLength method on empty linked list
 TEST(LinkedListEmptyInit, GetLengthTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ASSERT_EQ(0, ll.getLength());
     ll.insertAt(4, 3);
     ASSERT_EQ(1, ll.getLength());
@@ -152,7 +152,7 @@ TEST_F(LinkedListDataInit, GetLengthTest) {
 
 // test getLengthRecursive method on empty linked list
 TEST(LinkedListEmptyInit, GetLengthRecursiveTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ASSERT_EQ(0, ll.getLengthRecursive(ll.getHead()));
     ll.insertAt(4, 3);
     ASSERT_EQ(1, ll.getLengthRecursive(ll.getHead()));
@@ -177,7 +177,7 @@ TEST_F(LinkedListDataInit, GetLengthRecursiveTest) {
 
 // test deleteHead method on empty linked list
 TEST(LinkedListEmptyInit, DeleteHeadTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ASSERT_EQ(-1, ll.deleteHead());
 
     // after removing every node from linked list,
@@ -212,7 +212,7 @@ TEST_F(LinkedListDataInit, DeleteHeadTest) {
 
 // test deleteEnd method on empty linked list
 TEST(LinkedListEmptyInit, DeleteEndTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
 
     ll.insertHead(5);
     ASSERT_EQ(5, ll.deleteEnd());
@@ -255,7 +255,7 @@ TEST_F(LinkedListDataInit, DeleteEndTest) {
 
 // test deleteAt method on empty linked list
 TEST(LinkedListEmptyInit, DeleteAtTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ASSERT_EQ(-1, ll.deleteAt(3));
     ASSERT_EQ(-1, ll.deleteAt(0));
     ASSERT_EQ(-1, ll.deleteAt(-5));
@@ -298,7 +298,7 @@ TEST_F(LinkedListDataInit, DeleteAtTest) {
 
 // test deleteKey method on empty linked list
 TEST(LinkedListEmptyInit, DeleteKeyTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ASSERT_EQ(-1, ll.deleteKey(3));
     ASSERT_EQ(-1, ll.deleteKey(0));
     ASSERT_EQ(-1, ll.deleteKey(-5));
@@ -338,7 +338,7 @@ TEST_F(LinkedListDataInit, DeleteKeyTest) {
 
 // test deleteList method on empty linked list
 TEST(LinkedListEmptyInit, DeleteListTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ll.deleteList();
 
     // after removing every node from linked list,
@@ -369,7 +369,7 @@ TEST_F(LinkedListDataInit, DeleteListTest) {
 
 // test indexOf method on empty linked list
 TEST(LinkedListEmptyInit, IndexOfTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ASSERT_EQ(-1, ll.indexOf(2));
     ASSERT_EQ(-1, ll.indexOf(0));
     ASSERT_EQ(-1, ll.indexOf(-1));
@@ -400,7 +400,7 @@ TEST_F(LinkedListDataInit, IndexOfTest) {
 
 // test dataAt method on empty linked list
 TEST(LinkedListEmptyInit, DataAtTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ASSERT_EQ(-1, ll.dataAt(0));
     ASSERT_EQ(-1, ll.dataAt(-1));
     ASSERT_EQ(-1, ll.dataAt(1));
@@ -427,7 +427,7 @@ TEST_F(LinkedListDataInit, DataAtTest) {
 
 // test reverse method on empty linked list
 TEST(LinkedListEmptyInit, ReverseTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ll.Reverse();
 
     // after removing every node from linked list,
@@ -453,7 +453,7 @@ TEST_F(LinkedListDataInit, ReverseTest) {
 
 // test reverse method (recursive) on empty linked list
 TEST(LinkedListEmptyInit, ReverseRecursiveTest) {
-    LinkedList<int> ll;
+    LinkedList::LinkedList<int> ll;
     ll.ReverseRecursive(ll.getHead());
 
     // after removing every node from linked list,
