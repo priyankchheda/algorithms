@@ -178,7 +178,7 @@ TEST_F(LinkedListDataInit, GetLengthRecursiveTest) {
 // test deleteHead method on empty linked list
 TEST(LinkedListEmptyInit, DeleteHeadTest) {
     LinkedList::LinkedList<int> ll;
-    ASSERT_EQ(-1, ll.deleteHead());
+    ASSERT_THROW(ll.deleteHead(), LinkedList::EmptyList);
 
     // after removing every node from linked list,
     // head should point to nullptr
@@ -189,7 +189,7 @@ TEST(LinkedListEmptyInit, DeleteHeadTest) {
 // test deleteHead method on single linked list
 TEST_F(LinkedListSingleInit, DeleteHeadTest) {
     ASSERT_EQ(5, ll.deleteHead());
-    ASSERT_EQ(-1, ll.deleteHead());
+    ASSERT_THROW(ll.deleteHead(), LinkedList::EmptyList);
     // after removing every node from linked list,
     // head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
@@ -221,7 +221,7 @@ TEST(LinkedListEmptyInit, DeleteEndTest) {
     ASSERT_EQ(9, ll.deleteEnd());
 
     for (int i = 0; i < 5; i++)
-        ASSERT_EQ(-1, ll.deleteEnd());
+        ASSERT_THROW(ll.deleteEnd(), LinkedList::EmptyList);
 
     // after removing every node from linked list,
     // head should point to nullptr
@@ -232,7 +232,7 @@ TEST(LinkedListEmptyInit, DeleteEndTest) {
 // test deleteEnd method on single linked list
 TEST_F(LinkedListSingleInit, DeleteEndTest) {
     ASSERT_EQ(5, ll.deleteEnd());
-    ASSERT_EQ(-1, ll.deleteEnd());
+    ASSERT_THROW(ll.deleteEnd(), LinkedList::EmptyList);
     // after removing every node from linked list,
     // head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
@@ -256,9 +256,9 @@ TEST_F(LinkedListDataInit, DeleteEndTest) {
 // test deleteAt method on empty linked list
 TEST(LinkedListEmptyInit, DeleteAtTest) {
     LinkedList::LinkedList<int> ll;
-    ASSERT_EQ(-1, ll.deleteAt(3));
-    ASSERT_EQ(-1, ll.deleteAt(0));
-    ASSERT_EQ(-1, ll.deleteAt(-5));
+    ASSERT_THROW(ll.deleteAt(3), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteAt(0), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteAt(-5), LinkedList::InvalidPosition);
 
     // after removing every node from linked list,
     // head should point to nullptr
@@ -268,11 +268,11 @@ TEST(LinkedListEmptyInit, DeleteAtTest) {
 
 // test deleteAt method on single linked list
 TEST_F(LinkedListSingleInit, DeleteAtTest) {
-    ASSERT_EQ(-1, ll.deleteAt(2));
-    ASSERT_EQ(-1, ll.deleteAt(-1));
-    ASSERT_EQ(-1, ll.deleteAt(0));
+    ASSERT_THROW(ll.deleteAt(2), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteAt(-1), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteAt(0), LinkedList::InvalidPosition);
     ASSERT_EQ(5, ll.deleteAt(1));
-    ASSERT_EQ(-1, ll.deleteAt(1));
+    ASSERT_THROW(ll.deleteAt(1), LinkedList::InvalidPosition);
     // after removing every node from linked list,
     // head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
@@ -283,9 +283,9 @@ TEST_F(LinkedListSingleInit, DeleteAtTest) {
 TEST_F(LinkedListDataInit, DeleteAtTest) {
     ASSERT_EQ(3, ll.deleteAt(3));
     ASSERT_EQ(4, ll.deleteAt(3));
-    ASSERT_EQ(-1, ll.deleteAt(0));
-    ASSERT_EQ(-1, ll.deleteAt(5));
-    ASSERT_EQ(-1, ll.deleteAt(4));
+    ASSERT_THROW(ll.deleteAt(0), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteAt(5), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteAt(4), LinkedList::InvalidPosition);
     ASSERT_EQ(5, ll.deleteAt(3));
     ASSERT_EQ(1, ll.deleteAt(1));
     ASSERT_EQ(2, ll.deleteAt(1));
@@ -299,9 +299,10 @@ TEST_F(LinkedListDataInit, DeleteAtTest) {
 // test deleteKey method on empty linked list
 TEST(LinkedListEmptyInit, DeleteKeyTest) {
     LinkedList::LinkedList<int> ll;
-    ASSERT_EQ(-1, ll.deleteKey(3));
-    ASSERT_EQ(-1, ll.deleteKey(0));
-    ASSERT_EQ(-1, ll.deleteKey(-5));
+    ASSERT_THROW(ll.deleteKey(3), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteKey(0), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteKey(-5), LinkedList::InvalidPosition);
+
 
     // after removing every node from linked list,
     // head should point to nullptr
@@ -311,10 +312,10 @@ TEST(LinkedListEmptyInit, DeleteKeyTest) {
 
 // test deleteKey method on single Linked list
 TEST_F(LinkedListSingleInit, DeleteKeyTest) {
-    ASSERT_EQ(-1, ll.deleteKey(3));
-    ASSERT_EQ(-1, ll.deleteKey(0));
+    ASSERT_THROW(ll.deleteKey(3), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteKey(0), LinkedList::InvalidPosition);
     ASSERT_EQ(5, ll.deleteKey(5));
-    ASSERT_EQ(-1, ll.deleteKey(5));
+    ASSERT_THROW(ll.deleteKey(5), LinkedList::InvalidPosition);
 
     // after removing every node from linked list,
     // head should point to nullptr
@@ -324,8 +325,9 @@ TEST_F(LinkedListSingleInit, DeleteKeyTest) {
 
 // test deleteKey method on filled Linked list
 TEST_F(LinkedListDataInit, DeleteKeyTest) {
-    ASSERT_EQ(-1, ll.deleteKey(6));
-    ASSERT_EQ(-1, ll.deleteKey(0));
+    ASSERT_THROW(ll.deleteKey(6), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.deleteKey(0), LinkedList::InvalidPosition);
+
 
     for (int i = 1; i < 6; i++)
         ASSERT_EQ(i, ll.deleteKey(i));
@@ -374,6 +376,7 @@ TEST(LinkedListEmptyInit, IndexOfTest) {
     ASSERT_EQ(-1, ll.indexOf(0));
     ASSERT_EQ(-1, ll.indexOf(-1));
 
+
     // after removing every node from linked list,
     // head should point to nullptr
     ASSERT_EQ(nullptr, ll.getHead());
@@ -401,17 +404,18 @@ TEST_F(LinkedListDataInit, IndexOfTest) {
 // test dataAt method on empty linked list
 TEST(LinkedListEmptyInit, DataAtTest) {
     LinkedList::LinkedList<int> ll;
-    ASSERT_EQ(-1, ll.dataAt(0));
-    ASSERT_EQ(-1, ll.dataAt(-1));
-    ASSERT_EQ(-1, ll.dataAt(1));
+    ASSERT_THROW(ll.dataAt(0), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.dataAt(-1), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.dataAt(1), LinkedList::InvalidPosition);
+
 }
 
 // test dataAt method on empty linked list
 TEST_F(LinkedListSingleInit, DataAtTest) {
-    ASSERT_EQ(-1, ll.dataAt(-2));
-    ASSERT_EQ(-1, ll.dataAt(0));
+    ASSERT_THROW(ll.dataAt(-2), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.dataAt(0), LinkedList::InvalidPosition);
     ASSERT_EQ(5, ll.dataAt(1));
-    ASSERT_EQ(-1, ll.dataAt(2));
+    ASSERT_THROW(ll.dataAt(2), LinkedList::InvalidPosition);
     ASSERT_EQ(1, ll.getLength());
 }
 
@@ -419,8 +423,9 @@ TEST_F(LinkedListSingleInit, DataAtTest) {
 TEST_F(LinkedListDataInit, DataAtTest) {
     for (int i = 1; i < 6; i++)
         ASSERT_EQ(i, ll.dataAt(i));
-    ASSERT_EQ(-1, ll.dataAt(0));
-    ASSERT_EQ(-1, ll.dataAt(-1));
+    ASSERT_THROW(ll.dataAt(0), LinkedList::InvalidPosition);
+    ASSERT_THROW(ll.dataAt(-1), LinkedList::InvalidPosition);
+
 }
 
 /* Reverse Test */

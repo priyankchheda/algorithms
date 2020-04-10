@@ -2,6 +2,23 @@
 #define LINKEDLIST_H
 
 namespace LinkedList {
+
+    /**
+     * EmptyList exception is raised when you are trying to access
+     * element from empty linked list.
+    */
+    class EmptyList : public std::exception {
+        const char* what() const throw() {
+            return "linked list is empty";
+        }
+    };
+
+    class InvalidPosition : public std::exception {
+        const char* what() const throw() {
+            return "invalid position";
+        }
+    };
+
     template<typename T>
     struct Node {
         T data;
@@ -134,10 +151,13 @@ namespace LinkedList {
     /**
      * Delete head node from linked list
      * @return removedData value of deleted node
+     * @throws LinkedList::EmptyList if linked list is empty.
+     *      (can't delete from empty list)
     */
     template <typename T>
     T LinkedList<T>::deleteHead() {
-        if (head == nullptr) return -1;
+        if (head == nullptr)
+            throw EmptyList();
         Node<T>* temp = head;
         T removedData = temp->data;
         head = head->next;
@@ -148,10 +168,13 @@ namespace LinkedList {
     /**
      * Delete end node from linked list
      * @return removedData value of deleted node
+     * @throws LinkedList::EmptyList if linked list is empty.
+     *      (can't delete from empty list)
     */
     template <typename T>
     T LinkedList<T>::deleteEnd() {
-        if (head == nullptr) return -1;
+        if (head == nullptr)
+            throw EmptyList();
         Node<T>* current = head;
         if (head->next == nullptr) head = nullptr;
         else {
@@ -172,12 +195,13 @@ namespace LinkedList {
      * @param position position at which node needs to be deleted.
      *      Position is 1-based.
      * @return removedData value of deleted node
+     * @throw LinkedList::InvalidPosition if position is invalid
     */
     template <typename T>
     T LinkedList<T>::deleteAt(int position) {
         int ll_length = getLength();
         if (position < 1 || position > ll_length)
-            return -1;
+            throw InvalidPosition();
 
         if (position == 1)
             return deleteHead();
@@ -228,12 +252,13 @@ namespace LinkedList {
      * Get node value present at given position in the linked list
      * @param position position at which node value is needed. Position is 1-based.
      * @return node value at position
+     * @throw LinkedList::InvalidPosition if position is invalid
     */
     template <typename T>
     T LinkedList<T>::dataAt(int position) {
         int ll_length = getLength();
         if (position < 1 || position > ll_length)
-            return -1;
+            throw InvalidPosition();
 
         Node<T>* current = head;
         for (int i = 1; i < position; i++)
