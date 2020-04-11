@@ -6,34 +6,39 @@
  *                   |    v
  *                   5 <- 4
  * url: https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/
- * cmd: g++ detectLoop.cpp LinkedList/LinkedList.cpp -std=c++14
+ * cmd: g++ -Wall -std=c++14 detectLoop.cpp
 */
 
 #include <iostream>
 #include "LinkedList/LinkedList.hpp"
 
-bool detectLoop(LinkedList* ll);
+bool detectLoop(LinkedList::LinkedList<float>* ll);
 
 int main()
 {
-    LinkedList ll;
-    ll.insertEnd(1);
-    ll.insertEnd(2);
-    ll.insertEnd(3);
-    ll.insertEnd(4);
-    ll.insertEnd(5);
+    LinkedList::LinkedList<float> ll;
+    ll.insertEnd(1.1f);
+    ll.insertEnd(2.2f);
+    ll.insertEnd(3.3f);
+    ll.insertEnd(4.4f);
+    ll.insertEnd(5.5f);
 
     // creating loop
-    Node* head = ll.getHead();
+    LinkedList::Node<float>* head = ll.getHead();
     head->next->next->next->next->next = head->next;
 
-    std::cout << detectLoop(&ll) << "\n";
+    if (detectLoop(&ll))
+        std::cout << "cycle detected\n";
+    else std::cout << "cycle not detected\n";
 
-    LinkedList ll1;
-    ll1.insertEnd(1);
-    ll1.insertEnd(2);
-    ll1.insertEnd(3);
-    std::cout << detectLoop(&ll1) << "\n";
+    LinkedList::LinkedList<float> ll1;
+    ll1.insertEnd(1.2f);
+    ll1.insertEnd(2.3f);
+    ll1.insertEnd(3.4f);
+
+    if (detectLoop(&ll1))
+        std::cout << "cycle detected\n";
+    else std::cout << "cycle not detected\n";
     return 0;
 }
 
@@ -47,11 +52,11 @@ int main()
  * @param ll pointer to linked list
  * @return true if loop is present, else false.
 */
-bool detectLoop(LinkedList* ll)
+bool detectLoop(LinkedList::LinkedList<float>* ll)
 {
-    Node* head = ll->getHead();
-    Node* slowPtr = head;
-    Node* fastPtr = head;
+    LinkedList::Node<float>* head = ll->getHead();
+    LinkedList::Node<float>* slowPtr = head;
+    LinkedList::Node<float>* fastPtr = head;
 
     while (fastPtr != nullptr && fastPtr->next != nullptr) {
         fastPtr = fastPtr->next->next;
