@@ -6,28 +6,28 @@
  *
  * url: https://www.geeksforgeeks.org/write-a-function-that-counts-the-\
  *      number-of-times-a-given-int-occurs-in-a-linked-list/
- * cmd: g++ countFrequency.cpp LinkedList/LinkedList.cpp -std=c++14
+ * cmd: g++ -Wall -std=c++14 countFrequency.cpp
 */
 
 #include <iostream>
 #include "LinkedList/LinkedList.hpp"
 
-int countFrequency(LinkedList* ll, int key);
-int countFrequencyRecursion(Node* node, int key);
+int countFrequency(LinkedList::LinkedList<char>* ll, char key);
+int countFrequencyRecursion(LinkedList::Node<char>* node, char key);
 
 int main()
 {
-    LinkedList ll;
-    ll.insertEnd(1);
-    ll.insertEnd(2);
-    ll.insertEnd(1);
-    ll.insertEnd(2);
-    ll.insertEnd(1);
-    ll.insertEnd(3);
-    ll.insertEnd(1);
+    LinkedList::LinkedList<char> ll;
+    ll.insertEnd('a');
+    ll.insertEnd('b');
+    ll.insertEnd('a');
+    ll.insertEnd('b');
+    ll.insertEnd('a');
+    ll.insertEnd('c');
+    ll.insertEnd('a');
 
-    std::cout << countFrequency(&ll, 1) << "\n";
-    std::cout << countFrequencyRecursion(ll.getHead(), 1) << "\n";
+    std::cout << countFrequency(&ll, 'a') << "\n";
+    std::cout << countFrequencyRecursion(ll.getHead(), 'a') << "\n";
     return 0;
 }
 
@@ -38,9 +38,9 @@ int main()
  * @param key key integer who frequency we need
  * @return key count frequency
 */
-int countFrequency(LinkedList* ll, int key)
+int countFrequency(LinkedList::LinkedList<char>* ll, char key)
 {
-    Node* temp = ll->getHead();
+    LinkedList::Node<char>* temp = ll->getHead();
     int count = 0;
     while (temp) {
         if (temp->data == key)
@@ -57,7 +57,7 @@ int countFrequency(LinkedList* ll, int key)
  * @param key key integer who frequency we need
  * @return key count frequency
 */
-int countFrequencyRecursion(Node* node, int key)
+int countFrequencyRecursion(LinkedList::Node<char>* node, char key)
 {
     if (node == nullptr)
         return 0;
