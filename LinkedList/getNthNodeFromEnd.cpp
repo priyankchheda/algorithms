@@ -6,18 +6,18 @@
  *      A -> B -> C -> D -> NULL
  *
  * URL: https://www.geeksforgeeks.org/nth-node-from-the-end-of-a-linked-list/
- * cmd: g++ getNthNodeFromEnd.cpp LinkedList/LinkedList.cpp -Wall -std=c++14
+ * cmd: g++ -Wall -std=c++14 getNthNodeFromEnd.cpp
 */
 
 #include <iostream>
 #include "LinkedList/LinkedList.hpp"
 
-int getNthFromEnd_UsingLengthMethod(LinkedList* ll, int position);
-int getNthFromEnd_UsingTwoPointerMethod(LinkedList* ll, int position);
+int getNthFromEnd_UsingLengthMethod(LinkedList::LinkedList<int>* ll, int position);
+int getNthFromEnd_UsingTwoPointerMethod(LinkedList::LinkedList<int>* ll, int position);
 
 int main()
 {
-    LinkedList ll;
+    LinkedList::LinkedList<int> ll;
     ll.insertEnd(20);
     ll.insertEnd(4);
     ll.insertEnd(45);
@@ -53,14 +53,14 @@ int main()
  * @param position position from end. Position is 1-based.
  * @return nth node's value from end.
 */
-int getNthFromEnd_UsingLengthMethod(LinkedList* ll, int position)
+int getNthFromEnd_UsingLengthMethod(LinkedList::LinkedList<int>* ll, int position)
 {
     int length = ll->getLength();
     if (position >= length + 1 || position <= 0)
         return -1;
 
     int positionFromStart = length - position;
-    Node* node = ll->getHead();
+    LinkedList::Node<int>* node = ll->getHead();
     for (int i = 0; i < positionFromStart; i++)
         node = node->next;
     return node->data;
@@ -79,14 +79,14 @@ int getNthFromEnd_UsingLengthMethod(LinkedList* ll, int position)
  * @param position position from end. Position is 1-based.
  * @return nth node's value from end.
 */
-int getNthFromEnd_UsingTwoPointerMethod(LinkedList* ll, int position)
+int getNthFromEnd_UsingTwoPointerMethod(LinkedList::LinkedList<int>* ll, int position)
 {
     int length = ll->getLength();
-    Node* head = ll->getHead();
+    LinkedList::Node<int>* head = ll->getHead();
     if (position >= length + 1 || position <= 0)
         return -1;
-    Node* mainptr = head;
-    Node* refptr = head;
+    LinkedList::Node<int>* mainptr = head;
+    LinkedList::Node<int>* refptr = head;
     for (int i = 1; i < position; i++) {
         refptr = refptr->next;
     }
