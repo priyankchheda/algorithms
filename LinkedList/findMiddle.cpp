@@ -9,28 +9,28 @@
  *
  * URL: https://www.geeksforgeeks.org/write-a-c-function-to-print-the-\
  *      middle-of-the-linked-list/
- * cmd: g++ findMiddle.cpp LinkedList/LinkedList.cpp -Wall -std=c++14
+ * cmd: g++ -Wall -std=c++14 findMiddle.cpp
 */
 
 #include <iostream>
 #include "LinkedList/LinkedList.hpp"
 
-int findMiddle_UsingLength(LinkedList* ll);
-int findMiddle_UsingTwoPointer(LinkedList* ll);
-int findMiddle_UsingOddIncrement(LinkedList* ll);
+int findMiddle_UsingLength(LinkedList::LinkedList<int>* ll);
+int findMiddle_UsingTwoPointer(LinkedList::LinkedList<int>* ll);
+int findMiddle_UsingOddIncrement(LinkedList::LinkedList<int>* ll);
 
 int main()
 {
-    LinkedList empty_ll;
+    LinkedList::LinkedList<int> empty_ll;
 
-    LinkedList odd_ll;
+    LinkedList::LinkedList<int> odd_ll;
     odd_ll.insertEnd(1);
     odd_ll.insertEnd(2);
     odd_ll.insertEnd(3);
     odd_ll.insertEnd(4);
     odd_ll.insertEnd(5);
 
-    LinkedList even_ll;
+    LinkedList::LinkedList<int> even_ll;
     even_ll.insertEnd(1);
     even_ll.insertEnd(2);
     even_ll.insertEnd(3);
@@ -62,9 +62,9 @@ int main()
  * @param ll linked list object pointer.
  * @return middle node value
 */
-int findMiddle_UsingLength(LinkedList* ll)
+int findMiddle_UsingLength(LinkedList::LinkedList<int>* ll)
 {
-    Node* node = ll->getHead();
+    LinkedList::Node<int>* node = ll->getHead();
     int len = ll->getLength();
     int middle = len / 2;
 
@@ -84,11 +84,11 @@ int findMiddle_UsingLength(LinkedList* ll)
  * @param ll linked list object pointer.
  * @return middle node value
 */
-int findMiddle_UsingTwoPointer(LinkedList* ll)
+int findMiddle_UsingTwoPointer(LinkedList::LinkedList<int>* ll)
 {
-    Node* head = ll->getHead();
-    Node* fast = head;
-    Node* slow = head;
+    LinkedList::Node<int>* head = ll->getHead();
+    LinkedList::Node<int>* fast = head;
+    LinkedList::Node<int>* slow = head;
 
     if (slow == nullptr) return -1;
 
@@ -108,13 +108,13 @@ int findMiddle_UsingTwoPointer(LinkedList* ll)
  * @param ll linked list object pointer.
  * @return middle node value
 */
-int findMiddle_UsingOddIncrement(LinkedList* ll)
+int findMiddle_UsingOddIncrement(LinkedList::LinkedList<int>* ll)
 {
-    Node* node = ll->getHead();
+    LinkedList::Node<int>* node = ll->getHead();
     if (node == nullptr)
         return -1;
 
-    Node* mid = node;
+    LinkedList::Node<int>* mid = node;
     int counter = 0;
     while(node) {
         if (counter % 2 != 0)
