@@ -8,17 +8,17 @@
  *                   |    v
  *                   5 <- 4
  * url: https://www.geeksforgeeks.org/find-length-of-loop-in-linked-list/
- * cmd: g++ lengthOfLoop.cpp LinkedList/LinkedList.cpp -std=c++14
+ * cmd: g++ -Wall -std=c++14 lengthOfLoop.cpp
 */
 
 #include <iostream>
 #include "LinkedList/LinkedList.hpp"
 
-int detectAndCountLoop(Node* head);
+int detectAndCountLoop(LinkedList::Node<int>* head);
 
 int main()
 {
-    LinkedList ll;
+    LinkedList::LinkedList<int> ll;
     ll.insertEnd(1);
     ll.insertEnd(2);
     ll.insertEnd(3);
@@ -26,12 +26,12 @@ int main()
     ll.insertEnd(5);
 
     // creating loop
-    Node* head = ll.getHead();
+    LinkedList::Node<int>* head = ll.getHead();
     head->next->next->next->next->next = head->next;
 
     std::cout << detectAndCountLoop(head) << "\n";
 
-    LinkedList ll1;
+    LinkedList::LinkedList<int> ll1;
     ll1.insertEnd(1);
     ll1.insertEnd(2);
     ll1.insertEnd(3);
@@ -54,10 +54,10 @@ int main()
  * @param head node pointer linked list's head
  * @return length of loop
 */
-int detectAndCountLoop(Node* head)
+int detectAndCountLoop(LinkedList::Node<int>* head)
 {
-    Node* slowPtr = head;
-    Node* fastPtr = head;
+    LinkedList::Node<int>* slowPtr = head;
+    LinkedList::Node<int>* fastPtr = head;
     while (fastPtr != nullptr && fastPtr->next != nullptr) {
         fastPtr = fastPtr->next->next;
         slowPtr = slowPtr->next;
@@ -69,7 +69,7 @@ int detectAndCountLoop(Node* head)
         return 0;
 
     int counter = 1;
-    Node* temp = slowPtr->next;
+    LinkedList::Node<int>* temp = slowPtr->next;
     while(temp != slowPtr) {
         temp = temp->next;
         counter++;
