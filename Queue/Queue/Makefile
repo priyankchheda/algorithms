@@ -7,4 +7,4 @@ all:
 	$(CC) test_Queue.cpp $(CCFLAGS) -I$(GTEST_INCLUDE_PATH) -L$(GTEST_LIBRARY_PATH)
 
 clean:
-	rm ./a.out *.o
+	rm ./a.out
