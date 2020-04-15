@@ -78,7 +78,7 @@ namespace Stack {
      * insert(push) an element to stack.
      * @param item to be inserted in stack
      * @return status code 0, if operation is successful.
-     * @throws Stack::OverflowException if stack is full
+     * @throw Stack::OverflowException if stack is full
      *      (item not inserted).
     */
     template <typename T>
@@ -92,7 +92,7 @@ namespace Stack {
     /**
      * remove(pop) an integer element from stack.
      * @return popped value if operation is successful.
-     * @throws Stack::UnderflowException if stack is empty
+     * @throw Stack::UnderflowException if stack is empty
      *      (nothing to pop).
     */
     template <typename T>
@@ -106,7 +106,7 @@ namespace Stack {
     /**
      * Peek top element in stack without removing it.
      * @return top item without removing it.
-     * @throws UnderflowException exception if stack is empty
+     * @throw UnderflowException exception if stack is empty
      *      (nothing to peek).
     */
     template <typename T>
