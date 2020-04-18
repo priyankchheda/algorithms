@@ -13,7 +13,13 @@
 #ifndef BST_H
 #define BST_H
 
-#include <iostream>
+#include <exception>
+
+class EmptyTree : public std::exception {
+    const char* what() const throw() {
+        return "tree is empty";
+    }
+};
 
 // Node struct contains actual data and address to left and right node
 struct Node {
@@ -39,6 +45,8 @@ public:
     Node* getRoot() { return root; }
     void insert(int data);
     bool search(int data);
+    int min();
+    int max();
 };
 
 #endif

@@ -84,3 +84,41 @@ TEST_F(BSTDataInit, SearchTest)
     ASSERT_FALSE(bst.search(20));
     ASSERT_FALSE(bst.search(12));
 }
+
+// test min method on empty binary search tree
+TEST(BSTEmpty, findMinTest)
+{
+    BST bst;
+    ASSERT_THROW(bst.min(), EmptyTree);
+    bst.insert(5);
+    ASSERT_EQ(5, bst.min());
+    bst.insert(9);
+    ASSERT_EQ(5, bst.min());
+    bst.insert(3);
+    ASSERT_EQ(3, bst.min());
+}
+
+// test min method on filled binary search tree
+TEST_F(BSTDataInit, findMinTest)
+{
+    ASSERT_EQ(1, bst.min());
+}
+
+// test max method on empty binary search tree
+TEST(BSTEmpty, findMaxTest)
+{
+    BST bst;
+    ASSERT_THROW(bst.max(), EmptyTree);
+    bst.insert(5);
+    ASSERT_EQ(5, bst.max());
+    bst.insert(9);
+    ASSERT_EQ(9, bst.max());
+    bst.insert(3);
+    ASSERT_EQ(9, bst.max());
+}
+
+// test max method on filled binary search tree
+TEST_F(BSTDataInit, findMaxTest)
+{
+    ASSERT_EQ(10, bst.max());
+}

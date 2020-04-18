@@ -56,3 +56,39 @@ bool BST::search(Node* root, int data)
     else if (data < root->data) return search(root->left, data);
     else return search(root->right, data);
 }
+
+/**
+ * returns left-most item present in binary search tree which is also
+ * the minimum element in bst
+ * @return minimum element present in bst
+*/
+int BST::min()
+{
+    Node* root = getRoot();
+    if (root == nullptr)
+        throw EmptyTree();
+
+    Node* current = root;
+    while (current->left != nullptr)
+        current = current->left;
+
+    return current->data;
+}
+
+/**
+ * returns right-most item present in binary search tree which is also
+ * the maximum element in bst
+ * @return maximum element present in bst
+*/
+int BST::max()
+{
+    Node* root = getRoot();
+    if (root == nullptr)
+        throw EmptyTree();
+
+    Node* current = root;
+    while (current->right != nullptr)
+        current = current->right;
+
+    return current->data;
+}
