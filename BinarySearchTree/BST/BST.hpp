@@ -39,6 +39,7 @@ private:
     Node* root;
     Node* insert(Node* root, int data);
     bool search(Node* root, int data);
+    int height(Node* root);
 
 public:
     BST() { root = nullptr; }
@@ -47,6 +48,7 @@ public:
     bool search(int data);
     int min();
     int max();
+    int height();
 };
 
 #endif

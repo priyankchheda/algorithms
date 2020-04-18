@@ -122,3 +122,27 @@ TEST_F(BSTDataInit, findMaxTest)
 {
     ASSERT_EQ(10, bst.max());
 }
+
+// test height on empty binary search tree
+TEST(BSTEmpty, heightTest)
+{
+    BST bst;
+    ASSERT_THROW(bst.height(), EmptyTree);
+    bst.insert(5);
+    ASSERT_EQ(0, bst.height());
+    bst.insert(6);
+    ASSERT_EQ(1, bst.height());
+    bst.insert(7);
+    ASSERT_EQ(2, bst.height());
+    bst.insert(4);
+    ASSERT_EQ(2, bst.height());
+    bst.insert(3);
+    ASSERT_EQ(2, bst.height());
+    bst.insert(8);
+    ASSERT_EQ(3, bst.height());
+}
+
+TEST_F(BSTDataInit, heightTest)
+{
+    ASSERT_EQ(3, bst.height());
+}

@@ -92,3 +92,31 @@ int BST::max()
 
     return current->data;
 }
+
+/**
+ * height is recursive internal method that works at node-level
+ * @return height of tree/sub-tree
+*/
+int BST::height(Node* root)
+{
+    if (root == nullptr)
+        return -1;
+
+    int leftHeight = height(root->left);
+    int rightHeight = height(root->right);
+    if (leftHeight > rightHeight)
+        return leftHeight + 1;
+    return rightHeight + 1;
+}
+
+/**
+ * calculate height of binary search tree
+ * @return height of tree
+*/
+int BST::height()
+{
+    if (root == nullptr)
+        throw EmptyTree();
+
+    return height(root);
+}
