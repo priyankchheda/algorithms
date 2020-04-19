@@ -40,9 +40,11 @@ private:
     Node* insert(Node* root, int data);
     bool search(Node* root, int data);
     int height(Node* root);
+    void DeleteTreeRecursive(Node* node);
 
 public:
     BST() { root = nullptr; }
+    ~BST() { DeleteTreeRecursive(root); }
     Node* getRoot() const { return root; }
     void insert(int data);
     bool search(int data);

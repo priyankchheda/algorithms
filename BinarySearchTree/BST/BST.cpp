@@ -1,4 +1,21 @@
 #include "BST.hpp"
+#include <iostream>
+
+/**
+ * Delete tree nodes recursively
+*/
+void BST::DeleteTreeRecursive(Node* node)
+{
+    if (node == nullptr)
+        return;
+
+    if (node->left != nullptr)
+        DeleteTreeRecursive(node->left);
+    if (node->right != nullptr)
+        DeleteTreeRecursive(node->right);
+
+    delete node;
+}
 
 /**
  * inserts new integer data into the tree at the position, so that
