@@ -43,7 +43,7 @@ private:
 
 public:
     BST() { root = nullptr; }
-    Node* getRoot() { return root; }
+    Node* getRoot() const { return root; }
     void insert(int data);
     bool search(int data);
     int min();
