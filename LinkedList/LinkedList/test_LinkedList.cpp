@@ -4,7 +4,7 @@
 #include "LinkedList.hpp"
 
 /* Fixtures */
-// LinkedList containing only multiple node
+// LinkedList containing multiple node
 class LinkedListDataInit : public testing::Test {
 protected:
     LinkedList::LinkedList<int> ll;

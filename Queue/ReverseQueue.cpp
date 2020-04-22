@@ -5,6 +5,10 @@
  *
  * Input:  [1, 2, 3, 4, 5]
  * Output: [5, 4, 3, 2, 1]
+ *
+ * URL: https://www.geeksforgeeks.org/reversing-a-queue/
+ * URL: https://www.geeksforgeeks.org/reversing-queue-using-recursion/
+ * CMD: g++ -Wall -std=c++14 ReverseQueue.cpp
 */
 
 #include <iostream>
