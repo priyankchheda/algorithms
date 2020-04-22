@@ -41,6 +41,8 @@ private:
     bool search(Node* root, int data);
     int height(Node* root);
     void DeleteTreeRecursive(Node* node);
+    Node* deleteNode(Node* node, int value);
+    Node* findMinNode(Node* node);
 
 public:
     BST() { root = nullptr; }
@@ -51,6 +53,7 @@ public:
     int min();
     int max();
     int height();
+    void deleteNode(int value);
 };
 
 #endif

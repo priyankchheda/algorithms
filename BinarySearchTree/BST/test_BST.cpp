@@ -142,7 +142,36 @@ TEST(BSTEmpty, heightTest)
     ASSERT_EQ(3, bst.height());
 }
 
+// test height on filled binary search tree
 TEST_F(BSTDataInit, heightTest)
 {
     ASSERT_EQ(3, bst.height());
+}
+
+// test delete node method on empty search tree
+TEST(BSTEmpty, deleteNodeTest)
+{
+    BST bst;
+    bst.deleteNode(5);
+    ASSERT_EQ(nullptr, bst.getRoot());
+}
+
+// test delete node method on filled search tree
+TEST_F(BSTDataInit, deleteNodeTest)
+{
+    bst.deleteNode(3);
+    ASSERT_EQ(5, bst.getRoot()->left->data);
+    ASSERT_EQ(4, bst.getRoot()->left->left->data);
+    ASSERT_EQ(nullptr, bst.getRoot()->left->left->right);
+    ASSERT_EQ(1, bst.getRoot()->left->left->left->data);
+
+    bst.deleteNode(5);
+    Node* root = bst.getRoot();
+    ASSERT_EQ(9, root->data);
+    ASSERT_EQ(6, root->left->data);
+    ASSERT_EQ(10, root->right->data);
+    ASSERT_EQ(4, root->left->left->data);
+    ASSERT_EQ(1, root->left->left->left->data);
+    ASSERT_EQ(7, root->left->right->data);
+
 }

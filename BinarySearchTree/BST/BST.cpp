@@ -75,6 +75,18 @@ bool BST::search(Node* root, int data)
 }
 
 /**
+ * find the node with minimum value of give (sub)tree
+ * @param node root of sub(tree)
+ * @return node with minimum value
+*/
+Node* BST::findMinNode(Node* node)
+{
+    while (node->left != nullptr)
+        node = node->left;
+    return node;
+}
+
+/**
  * returns left-most item present in binary search tree which is also
  * the minimum element in bst
  * @return minimum element present in bst
@@ -136,4 +148,54 @@ int BST::height()
         throw EmptyTree();
 
     return height(root);
+}
+
+/**
+ * delete first occurance of value from binary search tree
+ * @param value node with value to be deleted
+*/
+void BST::deleteNode(int value)
+{
+    root = deleteNode(root, value);
+}
+
+/**
+ * delete is interal recursive method that works at node-level
+ * @param root root of (sub)tree
+ * @param value node with value to be deleted
+ * @return modified root node
+*/
+Node* BST::deleteNode(Node* root, int value)
+{
+    if (root == nullptr)
+        return root;
+
+    else if (value < root->data)
+        root->left = deleteNode(root->left, value);
+
+    else if (value > root->data)
+        root->right = deleteNode(root->right, value);
+
+    else {
+        if (root->left == nullptr && root->right == nullptr) {
+            delete root;
+            root = nullptr;
+        }
+        else if (root->left == nullptr) {
+            Node* temp = root;
+            root = root->right;
+            delete temp;
+        }
+        else if (root->right == nullptr) {
+            Node* temp = root;
+            root = root->left;
+            delete temp;
+        }
+        else {
+            Node* temp = findMinNode(root->right);
+            root->data = temp->data;
+            root->right = deleteNode(root->right, temp->data);
+        }
+    }
+    return root;
 }
