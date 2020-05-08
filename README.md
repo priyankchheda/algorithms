@@ -1,57 +1,67 @@
 # Algorithms
-Data Structure Libraries and Algorithms implementation in Go
-
-[![GoDoc](https://godoc.org/github.com/x899/algorithms?status.svg)](https://godoc.org/github.com/x899/algorithms) [![Go Report Card](https://goreportcard.com/badge/github.com/x899/algorithms)](https://goreportcard.com/report/github.com/x899/algorithms)
+Data Structure Libraries and Algorithms implementation in C++
 
 **Disclaimer**<br />
 This repository is meant to be used as a reference to learn data structure and
-algorithm in Go programming language.<br />To reduce unnecessary language
-complexity, all the programs only uses integer or string dataset.
-
-**Documentation**<br />
-[Click to view goDoc Documentation](https://godoc.org/github.com/x899/algorithms)
+algorithm.
 
 ## Data structure
-* Sorting Algorithms
-	* [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
-	* [Selection Sort](https://en.wikipedia.org/wiki/Selection_sort)
-	* [Insertion Sort](https://en.wikipedia.org/wiki/Insertion_sort)
-	* [Merge Sort](https://en.wikipedia.org/wiki/Merge_sort)
-	* [Quick Sort](https://en.wikipedia.org/wiki/Quicksort)
-	* [Quick Select](https://en.wikipedia.org/wiki/Quickselect)
-	* [Shell Sort](https://en.wikipedia.org/wiki/Shellsort)
-	* [Heap Sort](https://en.wikipedia.org/wiki/Heapsort)
-* [Stack (Array Implementation)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
-	* Infix to Postfix
-	* Infix to Prefix
-	* Infix Evaluation
-* [Queue (Array Implementation)](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))
-* LinkedList
-	* [Singly Linked List](https://en.wikipedia.org/wiki/Linked_list)
-	* [Doubly Linked List](https://en.wikipedia.org/wiki/Doubly_linked_list)
-* [Shuffle (Using Fisher-Yates (Knuth) shuffling algorithm)](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
-* [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
-* [Binary Heap](https://en.wikipedia.org/wiki/Binary_heap)
-    * Min Heap
-    * Max Heap
-* [Red Black Tree](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree)
+* [Dynamic Connectivity](DynamicConnectivity/)
+	* [Quick Find](DynamicConnectivity/QuickFind.cpp)
+	* [Quick Union](DynamicConnectivity/QuickUnion.cpp)
+	* [Weighted Quick Union](DynamicConnectivity/WeightedQuickUnion.cpp)
+* [Sorting Algorithms](Sort/)
+	* [Bubble Sort](Sort/BubbleSort.cpp)
+	* [Counting Sort](Sort/CountingSort.cpp)
+	* [Gnome Sort](Sort/GnomeSort.cpp)
+	* [Heap Sort](Sort/HeapSort.cpp)
+	* [Insertion Sort](Sort/InsertionSort.cpp)
+	* [Merge Sort](Sort/MergeSort.cpp)
+	* [Merge Bottom Up Sort](Sort/MergeButtomUp.cpp)
+	* [Merge Optimize Sort](Sort/MergeOptimizeSort.cpp)
+	* [Odd Even Sort](Sort/OddEvenSort.cpp)
+	* [Quick Sort](Sort/QuickSort.cpp)
+	* [Quick 3Way Sort](Sort/Quick3WaySort.cpp)
+	* [Quick Optimize Sort](Sort/QuickOptimizeSort.cpp)
+	* [Quick Select](Sort/QuickSelect.cpp)
+	* [Selection Sort](Sort/SelectionSort.cpp)
+	* [Shell Sort](Sort/ShellSort.cpp)
+* [Stack (Array Implementation)](Stack/Stack/)
+	* [Balanced Paranthesis](Stack/balancedParanthesis.cpp)
+	* [Infix to Prefix](Stack/infixToPostfix.cpp)
+	* [Track Current Maximum](Stack/trackingCurrentMax.cpp)
+* [Queue (Array Implementation)](Queue/Queue/)
+	* [Reverse Queue](Queue/ReverseQueue.cpp)
+	* [Sort Queue Without Extra Space](Queue/SortQueueWithoutExtraSpace.cpp)
+* [LinkedList](LinkedList/LinkedList)
+	* [Count Frequency](LinkedList/countFrequency.cpp)
+	* [Detect Loop](LinkedList/detectLoop.cpp)
+	* [Find Middle](LinkedList/findMiddle.cpp)
+	* [Get Nth Node from End](LinkedList/getNthNodeFromEnd.cpp)
+	* [Length of Loop](LinkedList/lengthOfLoop.cpp)
+* Suffle
+	* [Using Fisher-Yates (Knuth) shuffling algorithm](Shuffle/Shuffle.cpp)
+* [Binary Search Tree](BinarySearchTree/BST/)
+	* [BFS Traversal](BinarySearchTree/bfsTraversal.cpp)
+	* [DFS Traversal](BinarySearchTree/dfsTraversal.cpp)
+	* [Inorder Successor](BinarySearchTree/inorderSuccessor.cpp)
+	* [Is BST?](BinarySearchTree/isBST.cpp)
+* [Binary Heap](Heap/Heap)
+    * [Min Heap](Heap/Heap/MinHeap.cpp)
+    * [Max Heap](Heap/Heap/MaxHeap.cpp)
 * Search
-    * [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm)
+    * [Binary Search](Search/BinarySearch.h)
 
 ## TO DO
 * Vertical Order Traversal of Tree
 * Order Statistics of Tree
-* Red Black Tree Deletion
-* B-Tree
+* Red Black Tree
 * Deque using circular array
 * Tree Varient
 * Graph Varient
 * [cocktail sort](https://en.wikipedia.org/wiki/Cocktail_shaker_sort)
-* [gnome sort](https://en.wikipedia.org/wiki/Gnome_sort)
 * [comb sort](https://en.wikipedia.org/wiki/Comb_sort)
-* [odd-even sort](https://en.wikipedia.org/wiki/Odd%E2%80%93even_sort)
-* [counting sort](https://en.wikipedia.org/wiki/Counting_sort)
 
 ## Contribution
 Feel Free to contribute.<br />
-Please follow standard GoLang Guidelines.
+Please follow standard C++ Guidelines.
