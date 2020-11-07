@@ -2,62 +2,60 @@
 #include "RedBlackTree.hpp"
 
 /**
- * find the element in red black tree
- * @param data item to be searched
+ * Delete red black tree nodes recursively
 */
-bool RedBlackTree::find(int data) {
-    if (root == nullptr)
-        return false;
+void RedBlackTree::deleteTreeRecursive(Node* node) {
+    if (node == nullptr)
+        return;
 
-    return find(root, data);
+    if (node->left != nullptr)
+        deleteTreeRecursive(node->left);
+    if (node->right != nullptr)
+        deleteTreeRecursive(node->right);
+    delete node;
 }
 
 /**
- * find is an recursive internal method which works at node level
- * @param root root of tree/sub-tre
- * @param data item to be searched
+ * returns node color
+ * @param node pointer to red black tree node
 */
-bool RedBlackTree::find(Node* node, int data) {
-    if (root == nullptr)
-        return false;
-
-    if (data == root->data) return true;
-    else if (data < root->data) return find(root->left, data);
-    else return find(root->right, data);
+int RedBlackTree::getNodeColor(Node* node) {
+    if (node == nullptr)
+        return BLACK;
+    return node->color;
 }
 
 /**
- * returns left-most item present in red black tree which is also
- * the minimum element in red black tree
- * @return minimum element present in red black tree
+ * returns uncle of node
+ * @param node pointer to red black tree node
 */
-int RedBlackTree::min()
-{
-    Node* root = getRoot();
-    if (root == nullptr)
-        throw EmptyTree();
+Node* RedBlackTree::uncle(Node* node) {
+    if (node == nullptr || node->parent == nullptr ||
+        node->parent->parent == nullptr)
+            return nullptr;
 
-    Node* current = root;
-    while (current->left != nullptr)
-        current = current->left;
-
-    return current->data;
+    return sibling(node->parent);
 }
 
 /**
- * returns right-most item present in red black tree which is also
- * the maximum element in red black tree
- * @return maximum element present in red black tree
+ * returns sibling of given node
+ * @param node pointer to red black tree node
 */
-int RedBlackTree::max()
-{
-    Node* root = getRoot();
-    if (root == nullptr)
-        throw EmptyTree();
+Node* RedBlackTree::sibling(Node* node) {
+    if (node == nullptr || node->parent == nullptr)
+        return nullptr;
 
-    Node* current = root;
-    while (current->right != nullptr)
-        current = current->right;
+    if (node == node->parent->left)
+        return node->parent->right;
+    return node->parent->left;
+}
 
-    return current->data;
+/**
+ * returns grandparent of node
+ * @param node pointer to red black tree node
+*/
+Node* RedBlackTree::grandparent(Node* node) {
+    if (node == nullptr || node->parent == nullptr)
+        return nullptr;
+    return node->parent->parent;
 }

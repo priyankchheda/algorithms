@@ -40,6 +40,9 @@
 
 #include <exception>
 
+#define RED 0
+#define BLACK 1
+
 class EmptyTree : public std::exception {
     const char* what() const throw() {
         return "tree is empty";
@@ -67,17 +70,28 @@ struct Node {
 class RedBlackTree {
 private:
     Node* root;
+    int size;
     bool find(Node* node, int data);
-    // void deleteTreeRecursive(Node* node);
-    // void leftRotate(Node* node);
-    // void rightRotate(Node* node);
-    // void replaceNode(Node* node);
+    int getNodeColor(Node* node);
+    Node* uncle(Node* node);
+    Node* sibling(Node* node);
+    Node* grandparent(Node* node);
+    void leftRotate(Node* node);
+    void rightRotate(Node* node);
+    void replaceNode(Node* oldNode, Node* newNode);
+    void insertCase1(Node* node);
+    void insertCase2(Node* node);
+    void insertCase3(Node* node);
+    void insertCase4(Node* node);
+    void insertCase5(Node* node);
+    void deleteTreeRecursive(Node* node);
 
 public:
-    RedBlackTree() { root = nullptr; }
-    // ~RedBlackTree() { deleteTreeRecursive(root); }
+    RedBlackTree() { root = nullptr; size = 0;}
+    ~RedBlackTree() { deleteTreeRecursive(root); }
     Node* getRoot() { return root; }
-    // void insert(int data);
+    int getSize() { return size; }
+    void insert(int data);
     bool find(int data);
     int min();
     int max();
