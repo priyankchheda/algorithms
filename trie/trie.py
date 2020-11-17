@@ -8,27 +8,30 @@
 
 class Node:
     """ Node contains character and it's children trie node """
-    def __init__(self, character):
-        self.character = character
-        self.children = {}
+    def __init__(self):
+        self.children = [None] * 26
         self.word_finished = False
 
 
 class Trie:
     """ Trie Data Structure implementation """
     def __init__(self):
-        self.root = Node(None)
+        self.root = Node()
+
+    def char_to_index(self, char):
+        """ converts key character into index
+            use only 'a' through 'z' lower case
+        """
+        return ord(char) - ord('a')
 
     def insert(self, word):
         """ inserts a word in the trie data structure"""
         current = self.root
         for character in word:
-            if character in current.children:
-                current = current.children[character]
-            else:
-                new_node = Node(character)
-                current.children[character] = new_node
-                current = new_node
+            index = self.char_to_index(character)
+            if not current.children[index]:
+                current.children[index] = Node()
+            current = current.children[index]
         current.word_finished = True
 
     def search(self, word):
@@ -37,10 +40,11 @@ class Trie:
         """
         current = self.root
         for character in word:
-            if character not in current.children:
+            index = self.char_to_index(character)
+            if not current.children[index]:
                 return False
-            current = current.children[character]
-        return current.word_finished
+            current = current.children[index]
+        return current is not None and current.word_finished
 
     def starts_with(self, prefix):
         """ returns true if any word present in the trie start with the
@@ -48,18 +52,20 @@ class Trie:
         """
         current = self.root
         for character in prefix:
-            if character not in current.children:
+            index = self.char_to_index(character)
+            if not current.children[index]:
                 return False
-            current = current.children[character]
+            current = current.children[index]
         return True
 
     def delete(self, word):
         """ deletes word by negating word_finished boolean variable """
         current = self.root
         for character in word:
-            if character not in current.children:
+            index = self.char_to_index(character)
+            if not current.children[index]:
                 raise Exception("word not present in trie")
-            current = current.children[character]
+            current = current.children[index]
 
         if current.word_finished:
             current.word_finished = False
@@ -80,7 +86,6 @@ def main():
     print("removing 'app' from trie")
     tree.delete("app")
     print("is app present?", tree.search("app")) # False
-    breakpoint()
 
 
 if __name__ == "__main__":
