@@ -1,6 +1,6 @@
-""" Remove duplicates from linked list
-    input: 1 -> 6 -> 1 -> 4 -> 2 -> 2 -> 4
-    output: 1 -> 6 -> 4 -> 2
+""" Return nth element from last node
+    input: A -> B -> C -> D
+    output: B
 """
 
 class Node:

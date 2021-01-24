@@ -1,4 +1,4 @@
-""" Remove duplicates from linked list
+""" Remove duplicates from singly linked list
     input: 1 -> 6 -> 1 -> 4 -> 2 -> 2 -> 4
     output: 1 -> 6 -> 4 -> 2
 """

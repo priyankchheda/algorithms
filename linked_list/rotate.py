@@ -1,6 +1,6 @@
-""" Remove duplicates from linked list
-    input: 1 -> 6 -> 1 -> 4 -> 2 -> 2 -> 4
-    output: 1 -> 6 -> 4 -> 2
+""" Rotate singly linked list n times
+    input: 1 -> 2 -> 3 -> 4 -> 5 -> 6
+    output: 5 -> 6 -> 1 -> 2 -> 3 -> 4
 """
 
 class Node:

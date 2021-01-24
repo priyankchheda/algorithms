@@ -1,4 +1,6 @@
-""" Reverse linked lists
+""" Reverse singly linked lists
+    input: 1 -> 5 -> 7 -> 9 -> 10
+    output: 10 -> 9 -> 7 -> 5 -> 1
 """
 
 class Node:
