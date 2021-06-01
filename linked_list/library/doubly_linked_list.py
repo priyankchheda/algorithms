@@ -20,7 +20,8 @@ class DoublyLinkedList:
         self.head = None
 
     def is_empty(self):
-        """ returns True if the linked list is empty. Otherwise, return False. """
+        """ returns True if the linked list is empty. Otherwise, return False.
+        """
         return self.head is None
 
     def __len__(self):
