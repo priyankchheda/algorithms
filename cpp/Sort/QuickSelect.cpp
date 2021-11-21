@@ -111,15 +111,15 @@ int partition(T data[], int low, int high)
 template <typename T>
 int medianOfThree(T data[], int low, int high)
 {
-	int mid = (low + high) / 2;
-	if (data[high] < data[low]) {
-		std::swap(data[high], data[low]);
-	}
-	if (data[low] > data[mid]) {
-		std::swap(data[mid], data[low]);
-	}
-	if (data[mid] > data[high]) {
-		std::swap(data[high], data[mid]);
-	}
-	return mid;
+    int mid = (low + high) / 2;
+    if (data[high] < data[low]) {
+        std::swap(data[high], data[low]);
+    }
+    if (data[low] > data[mid]) {
+        std::swap(data[mid], data[low]);
+    }
+    if (data[mid] > data[high]) {
+        std::swap(data[high], data[mid]);
+    }
+    return mid;
 }
