@@ -1,7 +1,8 @@
+
 # Algorithms
 Data Structure Libraries and Algorithms implementation in C++
 
-**Disclaimer**<br />
+**Disclaimer** <br/>
 This repository is meant to be used as a reference to learn data structure and
 algorithm.
 
@@ -107,5 +108,24 @@ algorithm.
 * [comb sort](https://en.wikipedia.org/wiki/Comb_sort)
 
 ## Contribution
-Feel Free to contribute.<br />
+Feel Free to contribute.
+* Fork this repository (Click the Fork button in the top right of this page, click your Profile Image)
+* Clone your fork down to your local machine
+```markdown
+git clone <url> (given in clone or download button)
+```
+* Create a branch
+```markdown
+git checkout -b branch-name
+```
+* Make your changes (add algorithm)
+* Commit and Push
+```markdown
+git add .
+git commit -m 'commit message'
+git push origin branch-name
+```
+* Create a New Pull Request from your forked repository (Click the New Pull Request button located at the top of your repo)
+
+
 Please follow standard C++ Guidelines.
